@@ -1,0 +1,17 @@
+
+$default_grey : #CFCFCF;
+$default_height : 250px;
+
+
+.grey {
+  color : $default_grey;
+}
+
+.default_h_padding {
+  padding : 0px 10px;
+}
+
+.default_min_height {
+  min-height: $default_height;
+}
+
