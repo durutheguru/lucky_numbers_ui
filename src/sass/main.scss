@@ -1,17 +1,101 @@
 
 $default_grey : #CFCFCF;
 $default_height : 250px;
+$site_green : #74B093;
+$small_length : 7px;
+$medium_length : 15px;
+$big_length : 30px;
+$v_big_length : 40px;
 
 
 .grey {
   color : $default_grey;
 }
 
-.default_h_padding {
+.white {
+  color : white;
+}
+
+.default-h-padding {
   padding : 0px 10px;
 }
 
-.default_min_height {
+.default-min-height {
   min-height: $default_height;
 }
+
+.login-welcome-span {
+  position: relative;
+  left: 20px;
+}
+
+.login-site-name-container {
+  background: $site_green;
+  color : white;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.large-font {
+  font-size: 2em;
+}
+
+img.logo-img-medium {
+  width : 50px;
+  height : 50px;
+}
+
+.center-login {
+  width : 40%;
+  min-width : 350px;
+  height : 50%;
+  min-height : 250px;
+}
+
+.max-height {
+  height: 100%;
+}
+
+.grey-bordered {
+  border : 1px solid $default_grey;
+}
+
+.box-shadowed {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.h-padding-small {
+  padding-left : $small_length;
+  padding-right : $small_length;
+}
+
+.h-padding-medium {
+  padding-left : $medium_length;
+  padding-right : $medium_length;
+}
+
+.h-padding-20 {
+  padding-left : 20px;
+  padding-right : 20px;
+}
+
+.margin-top-big {
+  margin-top : $big_length;
+}
+
 
