@@ -1,15 +1,41 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import authToken from './modules/authToken';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
+
+  state : {
+    entryUrl : null,
   },
-  mutations: {
+
+
+  getters : {
+
+    entryUrl(context: any) {
+      return context.entryUrl;
+    },
+
   },
-  actions: {
+
+
+  mutations : {
+
+    entryUrl(context: any, url: string) {
+      context.entryUrl = url;
+    },
+
   },
-  modules: {
+
+
+  modules : {
+    authToken,
   },
+
+
 });
+
+
+
+
