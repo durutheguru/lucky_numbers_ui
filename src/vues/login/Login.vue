@@ -17,7 +17,6 @@
     export default class Login extends Vue {
 
 
-
     }
 
 </script>
