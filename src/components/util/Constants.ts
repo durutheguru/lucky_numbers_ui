@@ -6,5 +6,10 @@ export default class Constants {
         '/oauth/login',
     ];
 
+
+    public static regexps: any = {
+        AUTH_TOKEN: /^Bearer .+\.(.*)(\..+)+$/,
+    };
+
 }
 

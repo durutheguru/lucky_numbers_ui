@@ -1,14 +1,15 @@
 import { Component } from 'vue-property-decorator';
-import { required } from 'vuelidate/lib/validators';
 
 import BaseVue from '../../components/BaseVue';
 import { Log } from '../../components/util';
-
+import '../../components/util/Validation';
+import UserAuthContext from '@/components/auth/UserAuthContext';
 
 import LoginService from '../../services/login/LoginService';
 
 import WithRender from './login.html';
 import store from '@/store';
+
 
 @WithRender
 @Component
@@ -21,19 +22,6 @@ export default class LoginComponent extends BaseVue {
     private password: string = '';
 
     private loginError: string = '';
-
-
-    public validations() {
-        return {
-            username: {
-                required,
-            },
-
-            password: {
-                required,
-            },
-        };
-    }
 
 
     private doLogin() {
@@ -49,7 +37,7 @@ export default class LoginComponent extends BaseVue {
             (response: any) => {
                 this.loading = false;
                 store.commit('authToken/apiToken', response.headers.authorization);
-                this.$router.push({path: '/back-office'});
+                this.$router.push({path: UserAuthContext.getInstance().homeUrl()});
                 Log.info('Logged In: ' + JSON.stringify(response));
             },
 
@@ -66,12 +54,14 @@ export default class LoginComponent extends BaseVue {
         if (error.response) {
             if (error.response.status === 401) {
                 this.loginError = 'Invalid Username / Password';
+                return;
             } else if (error.response.status === 0) {
                 this.loginError = 'Cannot Reach Server';
+                return;
             }
-        } else {
-            this.loginError = 'Unknown Error Occurred';
         }
+
+        this.loginError = 'Unknown Error Occurred';
     }
 
 

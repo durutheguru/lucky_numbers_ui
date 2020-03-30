@@ -1,4 +1,5 @@
 import Web from '@/components/util/Web';
+import UserAuthContext from '@/components/auth/UserAuthContext';
 
 
 const state = {
@@ -23,8 +24,10 @@ const getters = {
 const mutations = {
 
     apiToken(context: any, token: string) {
-        context.authToken = token;
         context.loggedIn = true;
+        context.authToken = token;
+
+        UserAuthContext.getInstance().initialize(token);
     },
 
 };
