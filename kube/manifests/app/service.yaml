@@ -6,7 +6,7 @@ metadata:
   labels:
     app: lucky-numberz-front-end-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: lucky-numberz-front-end-service
   ports:
