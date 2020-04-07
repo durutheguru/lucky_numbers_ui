@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "gulp" : "gulp",
+    "gulp": "gulp",
     "start": "npm run gulp && vue-cli-service serve",
     "serve": "npm run start",
     "build": "vue-cli-service build",
+    "build-dev": "npm run gulp && vue-cli-service build --mode development",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
     "vue-property-decorator": "^8.3.0",
@@ -21,6 +23,7 @@
     "webpack-stream": "^5.2.1"
   },
   "devDependencies": {
+    "@types/vuelidate": "^0.7.11",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",
     "@vue/cli-plugin-typescript": "~4.2.0",

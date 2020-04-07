@@ -1,15 +1,12 @@
 module.exports = {
     devServer: {
-        port: 8083,
-        proxy: {
-            "/api/v1": {
-                target: "http://localhost:9011",
-                secure: false
-            }
-        }
+        port: 8083
     },
 
+    productionSourceMap: false,
+
     configureWebpack: {
+        devtool: "source-map",
         module: {
             rules: [
                 {
