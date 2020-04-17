@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import VueRouter, { Route } from 'vue-router';
 
 import Login from '../vues/login/Login.vue';
 import BackOffice from '../vues/backoffice/BackOffice.vue';
@@ -24,6 +24,24 @@ const routes = [
     path: '/back-office',
     name: 'BackOffice',
     component: BackOffice,
+    children: [
+      {
+        path: '/users',
+        children: [
+          {
+            path: '/back-office'
+          },
+
+          {
+            path: '/partner'
+          },
+
+          {
+            path: '/lottery'
+          },
+        ]
+      }
+    ]
   },
 
 ];
@@ -34,5 +52,10 @@ const router = new VueRouter({
 });
 
 router.beforeEach(guard);
+router.afterEach((to: Route, from: Route) => {
+  const vendorJS = document.createElement('script');
+  vendorJS.setAttribute('src', '/compiled/js/compile_000.js');
+  document.body.appendChild(vendorJS);
+});
 
 export default router;

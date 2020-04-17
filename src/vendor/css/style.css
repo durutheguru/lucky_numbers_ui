@@ -168,10 +168,9 @@ a, a:hover, a:focus {
 /*sidebar navigation*/
 
 #sidebar {
-    width: 210px;
+    width: 250px;
     height: 100%;
     position: fixed;
-    background: #2a3542;
 }
 
 #sidebar ul li {
@@ -216,9 +215,9 @@ ul.sidebar-menu , ul.sidebar-menu li ul.sub{
     padding: 0;
 }
 
-ul.sidebar-menu {
-    margin-top: 75px;
-}
+/* ul.sidebar-menu {
+    margin-top: 75px; 
+} */
 
 #sidebar > ul > li > ul.sub {
     display: none;

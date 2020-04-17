@@ -19,7 +19,8 @@ var cssVendorList = [
     "/bootstrap-reset.css",
     "/font-awesome.css",
     "/style.css",
-    "/style-responsive.css"
+    "/style-responsive.css",
+    "/slidebars.css"
 ];
 
 gulp.task('vendorCSSMin', function() {
