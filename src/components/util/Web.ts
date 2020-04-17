@@ -1,13 +1,14 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import store from '../../store';
 import { Log, Constants } from '.';
+import '@/interceptors/InterceptorRegistry';
 
 
 axios.interceptors.request.use(
     (config: AxiosRequestConfig): any => {
         const matchingExcludePaths = Constants.excludeApiPaths.filter((value: string, index: number) => {
             config.url = config.url || '';
-            return config.url?.indexOf(value) > -1;
+            return config.url.indexOf(value) > -1;
         });
 
         if (matchingExcludePaths.length === 0 && config.url?.startsWith(process.env.VUE_APP_BASE_URL)) {
