@@ -15,6 +15,10 @@
     })
     export default class BackOffice extends Vue {
 
+
     }
 
 </script>
+
+<style lang="scss" src="@/sass/main.scss"></style>
+

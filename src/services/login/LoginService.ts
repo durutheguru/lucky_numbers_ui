@@ -1,4 +1,5 @@
 import { Web } from '../../components/util';
+import '@/interceptors/login/LoginInterceptor';
 
 
 export default class LoginService {
