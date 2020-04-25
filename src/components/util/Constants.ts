@@ -1,7 +1,7 @@
 
 export default class Constants {
 
-    public static excludeApiPaths: string[] = [
+    public static authExcludeApiPaths: string[] = [
         '/login',
         '/oauth/login',
     ];

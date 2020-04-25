@@ -1,12 +1,13 @@
+import Vue from 'vue';
 import axios, { AxiosRequestConfig } from 'axios';
 import store from '../../store';
 import { Log, Constants } from '.';
-import '@/interceptors/InterceptorRegistry';
+// import '@/interceptors/InterceptorRegistry';
 
 
 axios.interceptors.request.use(
     (config: AxiosRequestConfig): any => {
-        const matchingExcludePaths = Constants.excludeApiPaths.filter((value: string, index: number) => {
+        const matchingExcludePaths = Constants.authExcludeApiPaths.filter((value: string, index: number) => {
             config.url = config.url || '';
             return config.url.indexOf(value) > -1;
         });

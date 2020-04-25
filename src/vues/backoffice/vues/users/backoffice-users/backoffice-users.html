@@ -1,0 +1,83 @@
+<div class="main-route-content">
+    <div class="row">
+        <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
+            <div class="iconic-input right">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control" placeholder="Search...">
+            </div>
+        </section>
+        <section v-if="hasUsers">
+            <span class="much-larger-font bold-font">{{users.pageData.totalElements}}</span>
+            <span>{{quantity(users.pageData.totalElements, 'registered user')}}</span>
+        </section>
+    </div>
+    <div class="row">
+        <div v-if="hasUsers">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">ID</th>
+                        <th class="col-md-3">Name</th>
+                        <th class="col-md-2">Username</th>
+                        <th class="col-md-3">Email</th>
+                        <th class="col-md-1">Created</th>
+                        <th class="col-md-1">Last Login</th>
+                        <th class="col-md-1"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in users.list">
+                        <td>
+                            {{user.id}}
+                        </td>
+                        <td>
+                            <span class="wine bold-font slight-bigger-font">{{user.name}}</span>
+                        </td>
+                        <td>
+                            <span class="dark-grey">{{user.username}}</span>
+                        </td>
+                        <td>
+                            <a :href="'mailto:' + user.email">{{user.email}}</a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="btn-group pull-right">
+                                <button 
+                                    data-toggle="dropdown" 
+                                    class="btn btn-white dropdown-toggle transparent-bg" 
+                                    type="button" 
+                                    aria-expanded="false">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="margin-top-m pull-right">
+                <button 
+                    @click="previous()"
+                    :disabled="!canPrevious"
+                    class="btn btn-danger app-btn-default">
+                    Previous
+                </button>
+                <button 
+                    @click="next()"
+                    :disabled="!canNext"
+                    class="btn btn-success app-btn-default">
+                    Next
+                </button>
+            </div>
+        </div>
+        <div class="alert alert-block alert-danger fade in" v-else>
+            <strong>Aww Crap!</strong> No users exist. Try creating a new User.
+        </div>
+    </div>
+</div>

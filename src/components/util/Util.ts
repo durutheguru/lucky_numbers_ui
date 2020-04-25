@@ -75,7 +75,7 @@ export default class Util {
     }
 
 
-    public static quantity(num: number, item: string, fullString: boolean) {
+    public static quantity(num: number, item: string, fullString?: boolean) {
         if (num < 0) {
             return item;
         }

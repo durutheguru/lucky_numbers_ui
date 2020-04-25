@@ -1,6 +1,8 @@
 
 export interface InterceptResponse {
 
+    status: number;
+
     body: any;
 
     headers: any;
@@ -12,11 +14,10 @@ export default interface InterceptConfig {
 
     url: string;
 
-    type: 'success' | 'error';
-
-    errorCode?: number;
+    method: 'GET' | 'POST';
 
     response: InterceptResponse;
 
 }
+
 

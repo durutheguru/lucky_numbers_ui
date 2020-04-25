@@ -3,8 +3,10 @@
     <SideMenu />
 
     <!--main content start-->
-    <section id="main-content" style="margin-left: 250px;">
-
+    <section id="main-content" style="margin-left: 250px !important;">
+        <section class="wrapper">
+            <router-view :key="$route.path" />
+        </section>
     </section>
     <!--main content end-->
 
@@ -87,7 +89,8 @@
                         <div class="percent">40%</div>
                     </div>
                     <div class="progress progress-striped">
-                        <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-success">
+                        <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40"
+                            role="progressbar" class="progress-bar progress-bar-success">
                             <span class="sr-only">40% Complete (success)</span>
                         </div>
                     </div>
@@ -100,7 +103,8 @@
                         <div class="percent">60%</div>
                     </div>
                     <div class="progress progress-striped">
-                        <div style="width: 60%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-warning">
+                        <div style="width: 60%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
+                            role="progressbar" class="progress-bar progress-bar-warning">
                             <span class="sr-only">60% Complete (warning)</span>
                         </div>
                     </div>
