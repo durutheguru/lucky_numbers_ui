@@ -1,14 +1,17 @@
 <div class="main-route-content">
     <div class="row">
         <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
-            <div class="iconic-input right">
-                <i class="fa fa-search"></i>
-                <input type="text" class="form-control" placeholder="Search...">
-            </div>
+            <search-field 
+                v-on:search-query-update="searchBackOfficeUsers"
+                v-on:search-query-cleared="searchCleared" />
         </section>
         <section v-if="hasUsers">
             <span class="much-larger-font bold-font">{{users.pageData.totalElements}}</span>
-            <span>{{quantity(users.pageData.totalElements, 'registered user')}}</span>
+            <span v-if="!users.searchResults">{{quantity(users.pageData.totalElements, 'registered user')}}</span>
+            <span v-if="users.searchResults">
+                {{quantity(users.pageData.totalElements, 'result')}} 
+                for <span class="blue">{{users.searchQuery}}</span>
+            </span>
         </section>
     </div>
     <div class="row">
@@ -19,9 +22,9 @@
                         <th class="col-md-1">ID</th>
                         <th class="col-md-3">Name</th>
                         <th class="col-md-2">Username</th>
-                        <th class="col-md-3">Email</th>
-                        <th class="col-md-1">Created</th>
-                        <th class="col-md-1">Last Login</th>
+                        <th class="col-md-1">Email</th>
+                        <th class="col-md-2">Created</th>
+                        <th class="col-md-2">Last Login</th>
                         <th class="col-md-1"></th>
                     </tr>
                 </thead>
@@ -39,7 +42,9 @@
                         <td>
                             <a :href="'mailto:' + user.email">{{user.email}}</a>
                         </td>
-                        <td></td>
+                        <td>
+                            <span>{{user.timeAdded}}</span>
+                        </td>
                         <td></td>
                         <td>
                             <div class="btn-group pull-right">
@@ -51,10 +56,9 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="javascript:void(0);" @click="showBackOfficeUserDetails(user)">View Details</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">Manage</a></li>
                                 </ul>
                             </div>
                         </td>
@@ -76,8 +80,27 @@
                 </button>
             </div>
         </div>
-        <div class="alert alert-block alert-danger fade in" v-else>
-            <strong>Aww Crap!</strong> No users exist. Try creating a new User.
+        <div v-else>
+            <div class="alert alert-block alert-primary fade in" v-if="loading">
+                <strong>Loading</strong> <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+            </div>
+            <div class="alert alert-block alert-danger fade in" v-else>
+                <span v-if="!users.searchResults">
+                    <strong>Aww Crap!</strong> No users exist. Try creating a new User.
+                </span>
+                <span v-else>
+                    <strong>No results matching search</strong>
+                </span>
+            </div>
         </div>
     </div>
+
+    <BackOfficeUserDetailsDialog 
+        v-if="userDetailsDialogShowing" 
+        v-bind:user="selectedUserDetails"
+        v-bind:visible="userDetailsDialogShowing"
+        v-on:close-dialog="hideBackOfficeUserDetails" />
+        
 </div>
+
+

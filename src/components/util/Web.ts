@@ -2,7 +2,6 @@ import Vue from 'vue';
 import axios, { AxiosRequestConfig } from 'axios';
 import store from '../../store';
 import { Log, Constants } from '.';
-// import '@/interceptors/InterceptorRegistry';
 
 
 axios.interceptors.request.use(
@@ -23,12 +22,21 @@ axios.interceptors.request.use(
 
 export default class Web {
 
+
     public static BASE_URL: string = process.env.VUE_APP_BASE_URL;
+
 
     public static get(
         url: string, successCallback: (response: any) => any, errorCallback?: (error: any) => any,
     ) {
-        axios.get(Web.BASE_URL + url)
+        Web.getAbsolute(Web.BASE_URL + url, successCallback, errorCallback);
+    }
+
+
+    public static getAbsolute(
+        url: string, successCallback: (response: any) => any, errorCallback?: (error: any) => any,
+    ) {
+        axios.get(url)
         .then(successCallback)
         .catch(errorCallback);
     }
@@ -37,7 +45,14 @@ export default class Web {
     public static post(
         url: string, data: any, successCallback: (response: any) => any, errorCallback?: (error: any) => any,
     ) {
-        axios.post(Web.BASE_URL + url, data)
+        Web.postAbsolute(Web.BASE_URL + url, data, successCallback, errorCallback);
+    }
+
+
+    public static postAbsolute(
+        url: string, data: any, successCallback: (response: any) => any, errorCallback?: (error: any) => any,
+    ) {
+        axios.post(url, data)
         .then(successCallback)
         .catch(errorCallback);
     }

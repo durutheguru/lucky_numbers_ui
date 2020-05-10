@@ -1,0 +1,15 @@
+<modal 
+    v-bind:show="visible"
+    v-on:close-dialog="close">
+    <h6 slot="header">Back-Office User Details</h6>
+    <div slot="body">
+        //Body
+    </div>
+    <div slot="footer">
+        <div class="pull-right">
+            <button class="btn btn-primary" @click="close()">
+                Close
+            </button>
+        </div>
+    </div>
+</modal>

@@ -2,6 +2,29 @@
 export default class Util {
 
 
+    private static throttleObject: any = {};
+
+
+    public static throttle(t: any) {
+        if (Util.throttleObject[t.key]) {
+            Util.throttleObject[t.key].exec = false;
+        }
+
+        Util.throttleObject[t.key] = t;
+        t.exec = true;
+
+        setTimeout(() => {
+            if (t.exec) {
+                if (Util.isValidFunction(t.func)) {
+                    t.func();
+                } else if (Util.isValidFunction(t.run)) {
+                    t.run();
+                }
+            }
+        }, t.time || 1000);
+    }
+
+
     public static isValidString(str: string, empty: boolean = false) {
         return (typeof str === 'string') && ((!empty) ? (!!str && !!str.length) : true);
     }

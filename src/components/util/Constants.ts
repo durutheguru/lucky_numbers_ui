@@ -11,5 +11,11 @@ export default class Constants {
         AUTH_TOKEN: /^Bearer .+\.(.*)(\..+)+$/,
     };
 
+
+    public static defaultPagination: any = {
+        page: 0,
+        size: 10
+    };
+
 }
 
