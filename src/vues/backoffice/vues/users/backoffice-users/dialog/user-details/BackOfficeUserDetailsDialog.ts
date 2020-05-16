@@ -4,7 +4,7 @@ import { Component, Prop } from 'vue-property-decorator';
 
 import Modal from '@/components/modal/Modal';
 import BaseVue from '@/components/BaseVue';
-import { Log } from '@/components/util';
+import { Log, Constants } from '@/components/util';
 
 
 @WithRender
@@ -28,7 +28,7 @@ export default class BackOfficeUserDetailsDialog extends BaseVue {
     }
 
     public close() {
-        this.$emit('close-dialog');
+        this.$emit(Constants.dialogClosedEvent);
     }
 
 

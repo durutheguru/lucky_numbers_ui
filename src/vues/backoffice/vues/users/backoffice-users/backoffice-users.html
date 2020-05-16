@@ -96,11 +96,16 @@
     </div>
 
     <BackOfficeUserDetailsDialog 
-        v-if="userDetailsDialogShowing" 
-        v-bind:user="selectedUserDetails"
-        v-bind:visible="userDetailsDialogShowing"
+        v-if="dialogOpts.userDetails.visible" 
+        v-bind:user="dialogOpts.userDetails.selectedUser"
+        v-bind:visible="dialogOpts.userDetails.visible"
         v-on:close-dialog="hideBackOfficeUserDetails" />
+
+    <CreateBackOfficeUserDialog
+        v-if="dialogOpts.createUser.visible"
+        v-bind:visible="dialogOpts.createUser.visible"
+        v-on:close-dialog="hideCreateBackOfficeUser" 
+    />
         
 </div>
-
 

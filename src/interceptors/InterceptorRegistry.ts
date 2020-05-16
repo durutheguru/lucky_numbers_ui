@@ -52,48 +52,5 @@ export default class InterceptorRegistry {
     }
 
 
-    // public static getInterceptorByUrl(url: string | undefined): IInterceptor | undefined {
-    //     if (!url) {
-    //         return;
-    //     }
-
-    //     for (const i of InterceptorRegistry.interceptors) {
-    //         for (const u of i.interceptConfigs) {
-    //             if (url.indexOf(u.url) > -1) {
-    //                 return i;
-    //             }
-    //         }
-    //     }
-    // }
-
-
 }
-
-
-// const DEFAULT_RESPONSE_INTERCEPTOR = (response: AxiosResponse): any => {
-//     return response;
-// };
-
-
-// axios.interceptors.request.use((config: AxiosRequestConfig): any => {
-//     const interceptor = InterceptorRegistry.getInterceptorByUrl(config.url);
-
-//     if (process.env.VUE_APP_ENABLE_INTERCEPTORS && interceptor) {
-//         const relativeUrlPath = config.url || '';
-//         // config.url = 'http://localhost:0' + interceptor.getMatchingUrl(relativeUrlPath);
-
-//         // axios.interceptors.response.use(
-//         //     DEFAULT_RESPONSE_INTERCEPTOR, 
-//         //     (error: AxiosError) => { 
-//         //         if (interceptor.hasMatchingUrl(relativeUrlPath)) {
-//         //             interceptor.rejectedPromiseHandler(error);
-//         //         }
-//         //     }
-//         // );
-
-//     }
-
-//     return config;
-// });
-
 

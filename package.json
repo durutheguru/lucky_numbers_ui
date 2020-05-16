@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "jquery": "^3.5.1",
     "raw-loader": "^4.0.1",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
@@ -26,6 +27,7 @@
     "webpack-stream": "^5.2.1"
   },
   "devDependencies": {
+    "@types/jquery": "^3.3.38",
     "@types/vuelidate": "^0.7.11",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-router": "~4.2.0",

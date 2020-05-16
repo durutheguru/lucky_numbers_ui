@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { Util } from '@/components/util';
+import { ValidationObserver } from 'vee-validate';
 
 
 export default class BaseVue extends Vue {
@@ -9,6 +10,10 @@ export default class BaseVue extends Vue {
 
 
     public isValidString = Util.isValidString;
+
+
+    public extractError = Util.extractError;
+
 
 }
 

@@ -1,8 +1,13 @@
 
+// colors
 $default_grey : #CFCFCF;
 $default_dark_grey : #9F9F9F;
 $default_height : 250px;
 $primary_color : #74B093;
+$wine: #812F2F;
+
+
+// dimensions
 $small_length : 7px;
 $medium_length : 15px;
 $big_length : 30px;
@@ -26,7 +31,7 @@ $v_big_length: 70px;
 }
 
 .wine {
-  color : #812F2F;
+  color : $wine;
 }
 
 .blue {
@@ -64,6 +69,14 @@ $v_big_length: 70px;
   transform: translate(-50%, -50%);
 }
 
+.center-container {
+  text-align: center;
+}
+
+i.mega-fa {
+  font-size: 8em;
+}
+
 .vertical-center {
   margin: 0;
   position: absolute;
@@ -82,6 +95,10 @@ $v_big_length: 70px;
 
 .slight-bigger-font {
   font-size: 1.3em;
+}
+
+.slight-smaller-font {
+  font-size: 0.85em;
 }
 
 img.logo-img-medium {
@@ -128,6 +145,11 @@ img.logo-img-medium {
   padding-right : $medium_length;
 }
 
+.h-padding-big {
+  padding-left : $big_length;
+  padding-right : $big_length;
+}
+
 .h-padding-20 {
   padding-left : 20px;
   padding-right : 20px;
@@ -143,8 +165,17 @@ img.logo-img-medium {
   margin-top : $big_length;
 }
 
+.margin-top-s {
+  margin-top : $small_length;
+}
+
 .margin-top-m {
   margin-top : $medium_length;
+}
+
+.v-padding-medium {
+  padding-top : $medium_length;
+  padding-bottom : $medium_length;
 }
 
 
@@ -211,7 +242,7 @@ img.logo-img-medium {
 
 
 .bottom-anchored {
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   margin-bottom: 6px;
 }
@@ -329,15 +360,16 @@ img.logo-img-medium {
   transition: opacity 0.3s ease;
 }
 
+
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 
+
 .modal-container {
-  width: 300px;
   margin: 0px auto;
-  padding: 20px 30px;
+  padding: 20px 10px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -345,17 +377,32 @@ img.logo-img-medium {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+
+.modal-small {
+  width: 300px;
+}
+
+
+.modal-medium {
+  width: 500px;
+}
+
+
 .modal-header h3 {
   margin-top: 0;
   color: #42b983;
 }
 
 .modal-body {
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .modal-default-button {
   float: right;
+}
+
+.btn-default-width {
+  width: 75px;
 }
 
 .modal-enter {
@@ -370,5 +417,23 @@ img.logo-img-medium {
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+
+.owl-carousel {
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+.owl-carousel {
+  touch-action: manipulation; 
+}
+
+.no-display {
+  display: none;
+}
+
+.invalid-field {
+  border: 1px solid $wine !important;
 }
 

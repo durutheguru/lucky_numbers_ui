@@ -1,5 +1,6 @@
 import { Web } from '@/components/util';
 import PageRequest from '@/components/core/PageRequest';
+// import '@/interceptors/back-office/users/BackOfficeUsersInterceptor';
 
 
 
@@ -38,6 +39,18 @@ export default class BackOfficeUserService {
         Web.get(
             '/api/v1/back_office_user/search/searchUsers?projection=backOfficeUserDetails&name=' 
             + query + '&username=' + query + '&page=' + pageRequest.page + '&size=' + pageRequest.size, 
+            successHandler, errorHandler
+        );
+    }
+
+
+    public static createBackOfficeUser(
+        user: any, 
+        successHandler: (response: any) => any,
+        errorHandler?: (error: any) => any
+    ) {
+        Web.post(
+            '/api/v1/back_office_user', user, 
             successHandler, errorHandler
         );
     }

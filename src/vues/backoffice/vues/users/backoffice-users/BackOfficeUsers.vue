@@ -8,8 +8,9 @@
 <script lang="ts">
 
     import {Component, Vue} from 'vue-property-decorator';
-
+    
     import BackOfficeUsersHome from './BackOfficeUsersHome';
+    import { Log } from '@/components/util';
 
 
     @Component({
@@ -18,6 +19,7 @@
         },
     })
     export default class BackOfficeUsers extends Vue {
+
 
     }
 

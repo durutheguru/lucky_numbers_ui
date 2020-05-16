@@ -18,6 +18,10 @@ export default class Modal extends BaseVue {
     private dialogVisible: boolean = false;
 
 
+    @Prop({default: 'modal-small'})
+    private modalClass!: string;
+
+
     public mounted() {
         this.dialogVisible = this.show;
 
@@ -42,3 +46,4 @@ export default class Modal extends BaseVue {
 
 
 }
+

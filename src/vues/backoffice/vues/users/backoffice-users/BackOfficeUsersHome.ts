@@ -6,9 +6,12 @@ import BackOfficeUserService from '@/services/users/BackOfficeUserService';
 import WithRender from './backoffice-users.html';
 import { Log, Constants } from '@/components/util';
 import PageRequest from '@/components/core/PageRequest';
+import { EventTrigger } from '@/components/core/Event';
 
 import BackOfficeUserDetailsDialog from './dialog/user-details/BackOfficeUserDetailsDialog';
+import CreateBackOfficeUserDialog from './dialog/new-user/CreateBackOfficeUserDialog';
 import SearchField from '@/components/search-field/SearchField';
+import UserAction from '@/components/core/UserAction';
 
 
 @WithRender
@@ -16,6 +19,7 @@ import SearchField from '@/components/search-field/SearchField';
     components: {
         SearchField,
         BackOfficeUserDetailsDialog,
+        CreateBackOfficeUserDialog,
     },
 })
 export default class BackOfficeUsersHome extends BaseVue {
@@ -26,9 +30,16 @@ export default class BackOfficeUsersHome extends BaseVue {
 
     private query: any = Constants.defaultPagination;
 
-    private selectedUserDetails: any = {};
+    private dialogOpts: any = {
+        userDetails: {
+            visible: false,
+            selectedUser: {},
+        },
 
-    private userDetailsDialogShowing: boolean = false;
+        createUser: {
+            visible: false,
+        },
+    };
 
     private users: any = {
         list: [],
@@ -41,7 +52,48 @@ export default class BackOfficeUsersHome extends BaseVue {
 
 
     public mounted() {
+        EventTrigger.trigger(
+            Constants.routeUpdateEvent, 
+
+            {
+                actions: [
+                    new UserAction(
+                        'Add BackOffice User',
+                        'fa-plus',
+                        () => {
+                            this.showCreateBackOfficeUser();
+                        }
+                    ),
+
+                    new UserAction(
+                        'Upload Users',
+                        'fa-cloud-upload',
+                        () => {
+                            this.uploadBackOfficeUsers();
+                        }
+                    )
+                ],
+            }
+        );
+
         this.loadBackOfficeUsers();
+    }
+
+
+    public showCreateBackOfficeUser() {
+        Log.info('Adding BackOffice User');
+        this.dialogOpts.createUser.visible = true;
+    }
+
+
+    public hideCreateBackOfficeUser() {
+        this.dialogOpts.createUser.visible = false;
+        this.loadBackOfficeUsers();
+    }
+
+
+    public uploadBackOfficeUsers() {
+        Log.info('Uploading BackOffice User');
     }
 
 
@@ -143,13 +195,13 @@ export default class BackOfficeUsersHome extends BaseVue {
 
 
     public showBackOfficeUserDetails(user: any) {
-        this.selectedUserDetails = user;
-        this.userDetailsDialogShowing = true;
+        this.dialogOpts.userDetails.selectedUser = user;
+        this.dialogOpts.userDetails.visible = true;
     }
 
 
     public hideBackOfficeUserDetails() {
-        this.userDetailsDialogShowing = false; 
+        this.dialogOpts.userDetails.visible = false; 
     }
 
 
