@@ -81,7 +81,7 @@ export default class BackOfficeUsersHome extends BaseVue {
 
 
     public showCreateBackOfficeUser() {
-        Log.info('Adding BackOffice User');
+        Log.info('Creating BackOffice User');
         this.dialogOpts.createUser.visible = true;
     }
 

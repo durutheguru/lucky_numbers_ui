@@ -28,7 +28,7 @@ export default class LoginComponent extends BaseVue {
         this.loading = true;
         this.loginError = '';
 
-        LoginService.initiate(
+        LoginService.doLogin(
             {
                 username: this.username,
                 password: this.password,

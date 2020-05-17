@@ -4,7 +4,6 @@ import VueRouter, { Route } from 'vue-router';
 import Login from '../vues/login/Login.vue';
 import Users from '@/vues/backoffice/vues/users/Users.vue';
 import BackOffice from '../vues/backoffice/BackOffice.vue';
-import BackOfficeUsers from '@/vues/backoffice/vues/users/backoffice-users/BackOfficeUsers.vue';
 
 import guard from './util/guard';
 import afterRouteScriptLoader from './util/afterRouteScriptLoader';
@@ -35,7 +34,7 @@ const routes = [
         children: [
           {
             path: 'back-office',
-            component: BackOfficeUsers,
+            component: () => import('@/vues/backoffice/vues/users/backoffice-users/BackOfficeUsers.vue'),
           },
     
           {

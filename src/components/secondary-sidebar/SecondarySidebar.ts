@@ -7,6 +7,8 @@ import { Log, Constants } from '@/components/util';
 import { EventBus } from '@/components/core/Event';
 import UserAction from '@/components/core/UserAction';
 
+import LoginService from '@/services/login/LoginService';
+
 
 @Component
 @WithRender
@@ -41,6 +43,11 @@ export default class SecondarySidebar extends BaseVue {
     private execute(action: UserAction) {
         action.executable();
         $('.sb-toggle-right').click();
+    }
+
+
+    private logout() {
+        LoginService.doLogout();
     }
 
 
