@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import { Util } from '@/components/util';
+import { Component } from 'vue-property-decorator';
 import { ValidationObserver } from 'vee-validate';
 
 
+@Component
 export default class BaseVue extends Vue {
 
     

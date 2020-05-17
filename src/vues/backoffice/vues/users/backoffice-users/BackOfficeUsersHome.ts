@@ -1,4 +1,4 @@
-import { Component } from 'vue-property-decorator';
+import { Component, Mixins } from 'vue-property-decorator';
 
 import BaseVue from '@/components/BaseVue';
 import BackOfficeUserService from '@/services/users/BackOfficeUserService';
@@ -12,6 +12,7 @@ import BackOfficeUserDetailsDialog from './dialog/user-details/BackOfficeUserDet
 import CreateBackOfficeUserDialog from './dialog/new-user/CreateBackOfficeUserDialog';
 import SearchField from '@/components/search-field/SearchField';
 import UserAction from '@/components/core/UserAction';
+import PageDataModel from '@/components/core/PageDataModel';
 
 
 @WithRender
@@ -24,11 +25,6 @@ import UserAction from '@/components/core/UserAction';
 })
 export default class BackOfficeUsersHome extends BaseVue {
 
-    private loading: boolean = false;
-
-    private error: string = '';
-
-    private query: any = Constants.defaultPagination;
 
     private dialogOpts: any = {
         userDetails: {
@@ -41,14 +37,12 @@ export default class BackOfficeUsersHome extends BaseVue {
         },
     };
 
-    private users: any = {
-        list: [],
-        pageData: {
-            next: {}, previous: {},
-        }, 
-        searchResults: false,
-        searchQuery: '',
-    };
+
+    private elements: PageDataModel = new PageDataModel(
+        'backOfficeUsers', 
+        this.loadBackOfficeUsers.bind(this),
+        this.searchBackOfficeUsers.bind(this)
+    );
 
 
     public mounted() {
@@ -76,7 +70,7 @@ export default class BackOfficeUsersHome extends BaseVue {
             }
         );
 
-        this.loadBackOfficeUsers();
+        this.elements.initialize();
     }
 
 
@@ -98,99 +92,84 @@ export default class BackOfficeUsersHome extends BaseVue {
 
 
     public loadBackOfficeUsers(url?: string) {
-        this.setLoading(true);
-        BackOfficeUserService.getBackOfficeUsers(
-            new PageRequest(this.query.page, this.query.size, url), 
+        this.elements.setLoading(true);
 
-            (response: any) => {
-                this.setLoading(false);
-                this.assignUsersResponse(response);
-            },
+        BackOfficeUserService.getBackOfficeUsers(
+            new PageRequest(
+                this.elements.pageData.number, 
+                this.elements.pageData.size, 
+                url
+            ), 
+
+            (response: any) => this.handleSuccessResponse(response),
 
             (error: any) => {
-                this.setLoading(false);
+                this.elements.setLoading(false);
             }
         );
     }
 
 
-    public setLoading(loading: boolean) {
-        if (loading) {
-            this.error = '';
-            Log.info('Loading BackOffice Users');
-        }
-
-        this.loading = loading;
-    }
-
-
-    public get hasUsers(): boolean {
-        return !!this.users.pageData.totalElements;
+    public get hasElements(): boolean {
+        return this.elements && this.elements.hasElements();
     }
 
 
     public get canPrevious(): boolean {
-        return !!this.users.pageData.previous.href;
+        return this.elements.canPrevious();
     }
 
 
     public get canNext(): boolean {
-        return !!this.users.pageData.next.href;
+        return this.elements.canNext();
     }
 
 
     public next() {
-        if (!this.users.searchResults) {
-            Log.info('Loading Next BackOffice Users...');
-            this.loadBackOfficeUsers(
-                this.users.pageData.next.href
-            );
-        } else {
-            Log.info('Searching Next BackOffice Users...');
-            this.searchBackOfficeUsers(
-                this.users.searchQuery, this.users.pageData.next.href
-            );
-        }
+        this.elements.next();
     }
 
 
     public previous() {
-        if (!this.users.searchResults) {
-            Log.info('Loading Previous BackOffice Users...');
-            this.loadBackOfficeUsers(
-                this.users.pageData.previous.href
-            );
-        } else {
-            Log.info('Searching Previous BackOffice Users...');
-            this.searchBackOfficeUsers(
-                this.users.searchQuery, this.users.pageData.previous.href
-            );
-        }
+        this.elements.previous();
+    }
+
+
+    public searchCleared() {
+        this.elements.clearPageData();
+        this.elements.initialize();
     }
 
 
     public searchBackOfficeUsers(
         query: string, url?: string
     ) {
-        this.users.searchQuery = query;
+        this.elements.searchQuery = query;
 
-        this.clearPageData();
-        this.setLoading(true);
+        this.elements.clearPageData();
+        this.elements.setLoading(true);
 
         BackOfficeUserService.searchBackOfficeUsers(
-            query, 
+            this.elements.searchQuery, 
 
-            new PageRequest(this.query.page, this.query.size, url),
+            new PageRequest(
+                this.elements.pageData.number, 
+                this.elements.pageData.size, 
+                url
+            ),
 
-            (response: any) => {
-                this.setLoading(false);
-                this.assignUsersResponse(response, true);
-            },
+            (response: any) => this.handleSuccessResponse(response, true),
 
             (error: any) => {
-                this.setLoading(false);
+                this.elements.setLoading(false);
             }
         );
+    }
+
+
+    private handleSuccessResponse(response: any, searchResults: boolean = false) {
+        this.elements.setLoading(false);
+        this.elements.assignResponse(response, searchResults);
     }
 
 
@@ -205,26 +184,6 @@ export default class BackOfficeUsersHome extends BaseVue {
     }
 
 
-    public searchCleared() {
-        this.clearPageData();
-        this.loadBackOfficeUsers();
-    }
-
-
-    private clearPageData() {
-        this.users.pageData = {};
-        this.query = Constants.defaultPagination;
-    }
-
-
-    private assignUsersResponse(response: any, isSearchResult: boolean = false) {
-        this.users.searchResults = isSearchResult;
-        this.users.list = response.data._embedded.backOfficeUsers;
-        this.users.pageData = response.data.page;
-        this.users.pageData.next = response.data._links.next || {};
-        this.users.pageData.previous = response.data._links.prev || {};
-    }
-
-
 }
+
 
