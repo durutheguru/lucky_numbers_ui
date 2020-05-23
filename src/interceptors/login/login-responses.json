@@ -3,7 +3,7 @@
         "status": 200,
 
         "headers": {
-            "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIiLCJhdXRob3JpemF0aW9ucyI6WyJCQUNLX09GRklDRV9VU0VSIl0sImV4cCI6MTU4OTgwNTExN30.2y0fRUd2HWze8QWz0wAHYDTGSRwwDAqzK5vOSkzJTCh56Y1MQQN1LzEGwhBd0CQcQrXcBoCIf72BCBlUP7pqGg"
+            "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIiLCJhdXRob3JpemF0aW9ucyI6WyJCQUNLX09GRklDRV9VU0VSIl0sImV4cCI6MTU5MDMyNzY1Mn0.qQT2xW8W0icsbraBF7sla9GZwYcw2xuBpyL2BREoLMtWLKCODM5A-w2iQg-MxtV7LJLbKjZSmVuGlPyoNYlLWw"
         },
 
         "body": {

@@ -1,12 +1,12 @@
 
 import { Component, Prop } from 'vue-property-decorator';
-
-import Modal from '@/components/modal/Modal';
 import BaseVue from '@/components/BaseVue';
+import Modal from '@/components/modal/Modal';
+import { Constants } from '@/components/util';
 import BasicUserDetails from '@/vues/backoffice/components/user-details/BasicUserDetails';
-import { Log, Constants } from '@/components/util';
 
-import WithRender from './back-office-user-details-dialog.html';
+import WithRender from './lottery-user-details-dialog.html';
+
 
 
 @WithRender
@@ -16,8 +16,7 @@ import WithRender from './back-office-user-details-dialog.html';
         BasicUserDetails,
     },
 })
-export default class BackOfficeUserDetailsDialog extends BaseVue {
-
+export default class LotteryUserDetailsDialog extends BaseVue {
 
     @Prop({default: false})
     private visible!: boolean;
@@ -26,14 +25,11 @@ export default class BackOfficeUserDetailsDialog extends BaseVue {
     private user: any;
 
 
-    public mounted() {
-        Log.info('Showing User Details: ' + JSON.stringify(this.user));
-    }
-
     public close() {
         this.$emit(Constants.dialogClosedEvent);
     }
 
 
 }
+
 

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VueRouter, { Route } from 'vue-router';
+import VueRouter from 'vue-router';
 
 import Login from '../vues/login/Login.vue';
 import Users from '@/vues/backoffice/vues/users/Users.vue';
@@ -39,10 +39,12 @@ const routes = [
     
           {
             path: 'partner',
+            component: () => import('@/vues/backoffice/vues/users/partner-users/PartnerUsers.vue'),
           },
     
           {
             path: 'lottery',
+            component: () => import('@/vues/backoffice/vues/users/lottery-users/LotteryUsers.vue')
           },
         ]
       }

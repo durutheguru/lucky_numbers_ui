@@ -13,10 +13,10 @@ export default class BackOfficeUserService {
         errorHandler?: (error: any) => any
     ) {
         if (pageRequest.URL) {
-            Web.getAbsolute(pageRequest.URL + '&projection=backOfficeUserDetails', successHandler, errorHandler);
+            Web.getAbsolute(pageRequest.URL + '&projection=userDetails', successHandler, errorHandler);
         } else {
             Web.get(
-                '/api/v1/back_office_user?projection=backOfficeUserDetails&page=' 
+                '/api/v1/back_office_user?projection=userDetails&page=' 
                     + pageRequest.page + '&size=' + pageRequest.size, 
                 successHandler, 
                 errorHandler
@@ -32,12 +32,12 @@ export default class BackOfficeUserService {
         errorHandler?: (error: any) => any
     ) {
         if (pageRequest.URL) {
-            Web.getAbsolute(pageRequest.URL + '&projection=backOfficeUserDetails', successHandler, errorHandler);
+            Web.getAbsolute(pageRequest.URL + '&projection=userDetails', successHandler, errorHandler);
             return;
         }
 
         Web.get(
-            '/api/v1/back_office_user/search/searchUsers?projection=backOfficeUserDetails&name=' 
+            '/api/v1/back_office_user/search/searchUsers?projection=userDetails&name=' 
             + query + '&username=' + query + '&page=' + pageRequest.page + '&size=' + pageRequest.size, 
             successHandler, errorHandler
         );

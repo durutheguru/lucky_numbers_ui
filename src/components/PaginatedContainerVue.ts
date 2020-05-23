@@ -1,46 +1,50 @@
 
-import Vue from 'vue';
 import PageDataModel from './core/PageDataModel';
-import { Component } from 'vue-property-decorator';
 import BaseVue from './BaseVue';
 
 
-@Component
-export default class PaginatedContainerVue extends BaseVue {
-
-
-    public elements!: PageDataModel;
+export default abstract class PaginatedContainerVue extends BaseVue {
 
 
     public get hasElements(): boolean {
-        return this.elements && this.elements.hasElements();
+        return this.getPageDataModel() && this.getPageDataModel().hasElements();
     }
 
 
     public get canPrevious(): boolean {
-        return this.elements.canPrevious();
+        return this.getPageDataModel().canPrevious();
     }
 
 
     public get canNext(): boolean {
-        return this.elements.canNext();
+        return this.getPageDataModel().canNext();
     }
 
 
     public next() {
-        this.elements.next();
+        this.getPageDataModel().next();
     }
 
 
     public previous() {
-        this.elements.previous();
+        this.getPageDataModel().previous();
     }
 
 
-    public searchCleared() {
-        this.elements.clearPageData();
-        this.elements.initialize();
+    public handleSuccessResponse(response: any, searchResults: boolean = false) {
+        const elements = this.getPageDataModel();
+
+        elements.setLoading(false);
+        elements.assignResponse(response, searchResults);
     }
+
+
+    public handleErrorResponse(error: any) {
+        this.getPageDataModel().setLoading(false);
+    }
+
+
+    protected abstract getPageDataModel(): PageDataModel;
 
 
 }

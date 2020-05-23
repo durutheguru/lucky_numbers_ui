@@ -1,25 +1,23 @@
 <template>
-    <BackOfficeUsersHome />
+    <LotteryUsersHome />
 </template>
-
 
 <script lang="ts">
 
     import { Component, Vue } from 'vue-property-decorator';
-    import BackOfficeUsersHome from './BackOfficeUsersHome';
+    import LotteryUsersHome from './LotteryUsersHome';
 
     @Component({
         components: {
-            BackOfficeUsersHome,
+            LotteryUsersHome,
         },
     })
-    export default class BackOfficeUsers extends Vue {
-
-
-
+    export default class LotteryUsers extends Vue {
+        
     }
 
 </script>
+
 
 <style lang="scss" src="@/sass/main.scss"></style>
 

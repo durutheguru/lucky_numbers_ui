@@ -2,12 +2,13 @@
     <div class="row">
         <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
             <search-field 
-                v-on:search-query-update="searchBackOfficeUsers"
+                v-if="hasElements"
+                v-on:search-query-update="searchLotteryUsers"
                 v-on:search-query-cleared="searchCleared" />
         </section>
         <section v-if="hasElements">
             <span class="much-larger-font bold-font">{{elements.pageData.totalElements}}</span>
-            <span v-if="!elements.searchResults">{{quantity(elements.pageData.totalElements, 'registered Back-Office user')}}</span>
+            <span v-if="!elements.searchResults">{{quantity(elements.pageData.totalElements, 'registered Lottery user')}}</span>
             <span v-if="elements.searchResults">
                 {{quantity(elements.pageData.totalElements, 'result')}} 
                 for <span class="blue">{{elements.searchQuery}}</span>
@@ -19,8 +20,8 @@
 
             <user-table 
                 v-bind:users="elements"
-                v-on:user-details="showBackOfficeUserDetails" />
-
+                v-on:user-details="showLotteryUserDetails" />
+            
             <page-navigator 
                 v-bind:canNext="canNext"
                 v-bind:canPrevious="canPrevious"
@@ -43,17 +44,17 @@
         </div>
     </div>
 
-    <BackOfficeUserDetailsDialog 
+    <lottery-user-details-dialog 
         v-if="dialogOpts.userDetails.visible" 
         v-bind:user="dialogOpts.userDetails.selectedUser"
         v-bind:visible="dialogOpts.userDetails.visible"
-        v-on:close-dialog="hideBackOfficeUserDetails" />
-
-    <CreateBackOfficeUserDialog
+        v-on:close-dialog="hideLotteryUserDetails" />
+        
+    <create-lottery-user-dialog
         v-if="dialogOpts.createUser.visible"
         v-bind:visible="dialogOpts.createUser.visible"
-        v-on:close-dialog="hideCreateBackOfficeUser" />
-        
+        v-on:close-dialog="hideCreateLotteryUser" />
+
 </div>
 
 

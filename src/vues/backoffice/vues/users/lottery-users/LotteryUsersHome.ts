@@ -1,21 +1,18 @@
 import { Component } from 'vue-property-decorator';
-
-import BackOfficeUserService from '@/services/users/BackOfficeUserService';
-
-import { Log, Constants } from '@/components/util';
-import PageRequest from '@/components/core/PageRequest';
-import { EventTrigger } from '@/components/core/Event';
-
-import BackOfficeUserDetailsDialog from './dialog/user-details/BackOfficeUserDetailsDialog';
-import CreateBackOfficeUserDialog from './dialog/new-user/CreateBackOfficeUserDialog';
 import SearchField from '@/components/search-field/SearchField';
-import UserAction from '@/components/core/UserAction';
 import PageDataModel from '@/components/core/PageDataModel';
-import UserTable from '@/vues/backoffice/components/user-table/UserTable';
-import PaginatedContainerVue from '@/components/PaginatedContainerVue';
+import LotteryUserService from '@/services/users/LotteryUserService';
+import PageRequest from '@/components/core/PageRequest';
 import PageNavigator from '@/components/page-navigator/PageNavigator.vue';
+import PaginatedContainerVue from '@/components/PaginatedContainerVue';
+import { EventTrigger } from '@/components/core/Event';
+import { Constants, Log } from '@/components/util';
+import UserAction from '@/components/core/UserAction';
+import UserTable from '@/vues/backoffice/components/user-table/UserTable';
+import LotteryUserDetailsDialog from './dialog/user-details/LotteryUserDetailsDialog';
+import CreateLotteryUserDialog from './dialog/new-user/CreateLotteryUserDialog';
 
-import WithRender from './backoffice-users.html';
+import WithRender from './lottery-users.html';
 
 
 @WithRender
@@ -24,11 +21,11 @@ import WithRender from './backoffice-users.html';
         SearchField,
         UserTable,
         PageNavigator,
-        BackOfficeUserDetailsDialog,
-        CreateBackOfficeUserDialog,
-    },
+        LotteryUserDetailsDialog,
+        CreateLotteryUserDialog,
+    }
 })
-export default class BackOfficeUsersHome extends PaginatedContainerVue {
+export default class LotteryUsersHome extends PaginatedContainerVue {
 
 
     private dialogOpts: any = {
@@ -44,9 +41,9 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
 
 
     private elements: PageDataModel = new PageDataModel(
-        'backOfficeUsers', 
-        this.loadBackOfficeUsers.bind(this),
-        this.searchBackOfficeUsers.bind(this)
+        'lotteryUsers',
+        this.loadLotteryUsers.bind(this),
+        this.searchLotteryUsers.bind(this)
     );
 
 
@@ -57,10 +54,10 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
             {
                 actions: [
                     new UserAction(
-                        'Add BackOffice User',
+                        'Add Lottery User',
                         'fa-plus',
                         () => {
-                            this.showCreateBackOfficeUser();
+                            this.showCreateLotterUser();
                         }
                     ),
 
@@ -68,10 +65,10 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
                         'Upload Users',
                         'fa-cloud-upload',
                         () => {
-                            this.uploadBackOfficeUsers();
+                            this.uploadLotteryUsers();
                         }
                     )
-                ],
+                ]
             }
         );
 
@@ -79,15 +76,15 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
     }
 
 
-    public loadBackOfficeUsers(url?: string) {
+    private loadLotteryUsers(url?: string) {
         this.elements.setLoading(true);
 
-        BackOfficeUserService.getBackOfficeUsers(
+        LotteryUserService.getLotteryUsers(
             new PageRequest(
                 this.elements.pageData.number, 
                 this.elements.pageData.size, 
                 url
-            ), 
+            ),
 
             (response: any) => this.handleSuccessResponse(response),
 
@@ -96,20 +93,18 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
     }
 
 
-    public searchBackOfficeUsers(
-        query: string, url?: string
-    ) {
+    private searchLotteryUsers(query: string, url?: string) {
         this.elements.searchQuery = query;
 
         this.elements.clearPageData();
         this.elements.setLoading(true);
 
-        BackOfficeUserService.searchBackOfficeUsers(
-            this.elements.searchQuery, 
+        LotteryUserService.searchLotteryUsers(
+            this.elements.searchQuery,
 
             new PageRequest(
                 this.elements.pageData.number, 
-                this.elements.pageData.size, 
+                this.elements.pageData.size,
                 url
             ),
 
@@ -120,39 +115,38 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
     }
 
 
-    public showBackOfficeUserDetails(user: any) {
+    public searchCleared() {
+        this.elements.clearPageData();
+        this.elements.initialize();
+    }
+
+
+    public showLotteryUserDetails(user: any) {
+        Log.info('Showing Lottery User Details');
         this.dialogOpts.userDetails.selectedUser = user;
         this.dialogOpts.userDetails.visible = true;
     }
 
 
-    public hideBackOfficeUserDetails() {
-        this.dialogOpts.userDetails.visible = false; 
+    public hideLotteryUserDetails() {
+        this.dialogOpts.userDetails.visible = false;
     }
 
 
-    public showCreateBackOfficeUser() {
-        Log.info('Creating BackOffice User');
+    public showCreateLotterUser() {
+        Log.info('Creating Lottery User');
         this.dialogOpts.createUser.visible = true;
     }
 
 
-    public hideCreateBackOfficeUser() {
+    public hideCreateLotteryUser() {
         this.dialogOpts.createUser.visible = false;
-        this.loadBackOfficeUsers();
+        this.loadLotteryUsers();
     }
 
 
-    public uploadBackOfficeUsers() {
-        Log.info('Uploading BackOffice Users');
-    }
-
-
-    public searchCleared() {
-        const elements = this.getPageDataModel();
-
-        elements.clearPageData();
-        elements.initialize();
+    public uploadLotteryUsers() {
+        Log.info('Uploading Lottery Users');
     }
 
 

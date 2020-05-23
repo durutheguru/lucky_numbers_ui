@@ -1,21 +1,20 @@
+
 import { Component } from 'vue-property-decorator';
 
-import BackOfficeUserService from '@/services/users/BackOfficeUserService';
-
-import { Log, Constants } from '@/components/util';
-import PageRequest from '@/components/core/PageRequest';
-import { EventTrigger } from '@/components/core/Event';
-
-import BackOfficeUserDetailsDialog from './dialog/user-details/BackOfficeUserDetailsDialog';
-import CreateBackOfficeUserDialog from './dialog/new-user/CreateBackOfficeUserDialog';
-import SearchField from '@/components/search-field/SearchField';
-import UserAction from '@/components/core/UserAction';
 import PageDataModel from '@/components/core/PageDataModel';
-import UserTable from '@/vues/backoffice/components/user-table/UserTable';
+import PartnerUserService from '@/services/users/PartnerUserService';
+import PageRequest from '@/components/core/PageRequest';
 import PaginatedContainerVue from '@/components/PaginatedContainerVue';
+import { EventTrigger } from '@/components/core/Event';
+import { Constants, Log } from '@/components/util';
+import UserAction from '@/components/core/UserAction';
+import SearchField from '@/components/search-field/SearchField';
+import UserTable from '@/vues/backoffice/components/user-table/UserTable';
 import PageNavigator from '@/components/page-navigator/PageNavigator.vue';
 
-import WithRender from './backoffice-users.html';
+
+import WithRender from './partner-users.html';
+
 
 
 @WithRender
@@ -24,11 +23,9 @@ import WithRender from './backoffice-users.html';
         SearchField,
         UserTable,
         PageNavigator,
-        BackOfficeUserDetailsDialog,
-        CreateBackOfficeUserDialog,
-    },
+    }
 })
-export default class BackOfficeUsersHome extends PaginatedContainerVue {
+export default class PartnerUserHome extends PaginatedContainerVue {
 
 
     private dialogOpts: any = {
@@ -44,9 +41,9 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
 
 
     private elements: PageDataModel = new PageDataModel(
-        'backOfficeUsers', 
-        this.loadBackOfficeUsers.bind(this),
-        this.searchBackOfficeUsers.bind(this)
+        'partnerUsers', 
+        this.loadPartnerUsers.bind(this),
+        this.searchPartnerUsers.bind(this)
     );
 
 
@@ -57,10 +54,10 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
             {
                 actions: [
                     new UserAction(
-                        'Add BackOffice User',
+                        'Add Partner User',
                         'fa-plus',
                         () => {
-                            this.showCreateBackOfficeUser();
+                            this.showCreatePartnerUser();
                         }
                     ),
 
@@ -68,7 +65,7 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
                         'Upload Users',
                         'fa-cloud-upload',
                         () => {
-                            this.uploadBackOfficeUsers();
+                            this.uploadPartnerUsers();
                         }
                     )
                 ],
@@ -79,10 +76,10 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
     }
 
 
-    public loadBackOfficeUsers(url?: string) {
+    public loadPartnerUsers(url?: string) {
         this.elements.setLoading(true);
-
-        BackOfficeUserService.getBackOfficeUsers(
+        
+        PartnerUserService.getPartnerUsers(
             new PageRequest(
                 this.elements.pageData.number, 
                 this.elements.pageData.size, 
@@ -96,7 +93,7 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
     }
 
 
-    public searchBackOfficeUsers(
+    public searchPartnerUsers(
         query: string, url?: string
     ) {
         this.elements.searchQuery = query;
@@ -104,7 +101,7 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
         this.elements.clearPageData();
         this.elements.setLoading(true);
 
-        BackOfficeUserService.searchBackOfficeUsers(
+        PartnerUserService.searchPartnerUsers(
             this.elements.searchQuery, 
 
             new PageRequest(
@@ -120,31 +117,30 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
     }
 
 
-    public showBackOfficeUserDetails(user: any) {
+    public showPartnerUserDetails(user: any) {
         this.dialogOpts.userDetails.selectedUser = user;
         this.dialogOpts.userDetails.visible = true;
     }
 
 
-    public hideBackOfficeUserDetails() {
-        this.dialogOpts.userDetails.visible = false; 
+    public hidePartnerUserDetails() {
+        this.dialogOpts.userDetails.visible = false;
     }
 
 
-    public showCreateBackOfficeUser() {
-        Log.info('Creating BackOffice User');
+    public showCreatePartnerUser() {
         this.dialogOpts.createUser.visible = true;
     }
 
 
-    public hideCreateBackOfficeUser() {
+    public hideCreatePartnerUser() {
         this.dialogOpts.createUser.visible = false;
-        this.loadBackOfficeUsers();
+        this.loadPartnerUsers();
     }
 
 
-    public uploadBackOfficeUsers() {
-        Log.info('Uploading BackOffice Users');
+    public uploadPartnerUsers() {
+        Log.info('Uploading Partner Users');
     }
 
 
@@ -162,5 +158,4 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
 
 
 }
-
 

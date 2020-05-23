@@ -1,12 +1,12 @@
 
-import WithRender from './create-back-office-user-dialog.html';
 import { Component, Prop } from 'vue-property-decorator';
-
-import Modal from '@/components/modal/Modal';
 import BaseVue from '@/components/BaseVue';
-import { Log, Constants } from '@/components/util';
-import BackOfficeUserService from '@/services/users/BackOfficeUserService';
+import Modal from '@/components/modal/Modal';
 
+import WithRender from './create-lottery-user-dialog.html';
+import UserValidatorService from '../../../service/UserValidatorService';
+import LotteryUserService from '@/services/users/LotteryUserService';
+import { Constants } from '@/components/util';
 
 
 @WithRender
@@ -15,8 +15,7 @@ import BackOfficeUserService from '@/services/users/BackOfficeUserService';
         Modal,
     },
 })
-export default class CreateBackOfficeUserDialog extends BaseVue {
-
+export default class CreateLotteryUserDialog extends BaseVue {
 
     @Prop({default: false})
     private visible!: boolean;
@@ -27,7 +26,7 @@ export default class CreateBackOfficeUserDialog extends BaseVue {
 
     private loading: boolean = false;
 
-
+    
     private user!: any;
 
 
@@ -51,7 +50,7 @@ export default class CreateBackOfficeUserDialog extends BaseVue {
 
         this.loading = true;
 
-        BackOfficeUserService.createBackOfficeUser(
+        LotteryUserService.createLotteryUser(
             this.user,
 
             (response: any) => {
@@ -59,7 +58,6 @@ export default class CreateBackOfficeUserDialog extends BaseVue {
             },
 
             (error: any) => {
-                Log.error('Error occurred: ' + JSON.stringify(error));
                 this.loading = false;
                 this.error = this.extractError(error);
             }
@@ -68,12 +66,7 @@ export default class CreateBackOfficeUserDialog extends BaseVue {
 
 
     public validUserModel() {
-        if (this.user.password !== this.user.confirmPassword) {
-            this.error = 'Please confirm password';
-            return false;
-        }
-
-        return true;
+        return UserValidatorService.validate(this.user, this);
     }
 
 
@@ -83,4 +76,5 @@ export default class CreateBackOfficeUserDialog extends BaseVue {
 
 
 }
+
 
