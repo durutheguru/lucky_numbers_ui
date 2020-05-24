@@ -2,7 +2,7 @@
 import { Component } from 'vue-property-decorator';
 
 import PageDataModel from '@/components/core/PageDataModel';
-import PartnerUserService from '@/services/users/PartnerUserService';
+import PartnerUserService from '@/vues/backoffice/vues/users/partner-users/service/PartnerUserService';
 import PageRequest from '@/components/core/PageRequest';
 import PaginatedContainerVue from '@/components/PaginatedContainerVue';
 import { EventTrigger } from '@/components/core/Event';
@@ -78,7 +78,7 @@ export default class PartnerUserHome extends PaginatedContainerVue {
 
     public loadPartnerUsers(url?: string) {
         this.elements.setLoading(true);
-        
+
         PartnerUserService.getPartnerUsers(
             new PageRequest(
                 this.elements.pageData.number, 

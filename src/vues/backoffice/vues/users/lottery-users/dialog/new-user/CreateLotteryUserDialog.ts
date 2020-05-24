@@ -5,7 +5,7 @@ import Modal from '@/components/modal/Modal';
 
 import WithRender from './create-lottery-user-dialog.html';
 import UserValidatorService from '../../../service/UserValidatorService';
-import LotteryUserService from '@/services/users/LotteryUserService';
+import LotteryUserService from '@/vues/backoffice/vues/users/lottery-users/service/LotteryUserService';
 import { Constants } from '@/components/util';
 
 

@@ -1,6 +1,6 @@
 import { Component } from 'vue-property-decorator';
 
-import BackOfficeUserService from '@/services/users/BackOfficeUserService';
+import BackOfficeUserService from '@/vues/backoffice/vues/users/backoffice-users/service/BackOfficeUserService';
 
 import { Log, Constants } from '@/components/util';
 import PageRequest from '@/components/core/PageRequest';

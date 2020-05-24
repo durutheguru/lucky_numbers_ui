@@ -5,7 +5,7 @@ import { Component, Prop } from 'vue-property-decorator';
 import Modal from '@/components/modal/Modal';
 import BaseVue from '@/components/BaseVue';
 import { Log, Constants } from '@/components/util';
-import BackOfficeUserService from '@/services/users/BackOfficeUserService';
+import BackOfficeUserService from '@/vues/backoffice/vues/users/backoffice-users/service/BackOfficeUserService';
 
 
 

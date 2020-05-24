@@ -5,7 +5,7 @@ import { Log } from '../../components/util';
 import '@/components/util/Validation';
 import UserAuthContext from '@/components/auth/UserAuthContext';
 
-import LoginService from '../../services/login/LoginService';
+import LoginService from './service/LoginService';
 
 import WithRender from './login.html';
 import store from '@/store';

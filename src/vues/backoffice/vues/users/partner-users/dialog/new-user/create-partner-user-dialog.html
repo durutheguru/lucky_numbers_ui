@@ -4,6 +4,7 @@
     <div class="row h-padding-big" slot="body">
         <validation-observer ref="observer" tag="form" role="form" v-slot="{ invalid }" @submit.prevent="createUser"
             novalidate>
+            
             <div class="form-group">
                 <label for="nameField">Name</label>
                 <validation-provider rules="required" v-slot="{ invalid }" immediate>

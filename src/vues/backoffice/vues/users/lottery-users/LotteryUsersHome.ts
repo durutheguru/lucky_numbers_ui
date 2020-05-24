@@ -1,7 +1,7 @@
 import { Component } from 'vue-property-decorator';
 import SearchField from '@/components/search-field/SearchField';
 import PageDataModel from '@/components/core/PageDataModel';
-import LotteryUserService from '@/services/users/LotteryUserService';
+import LotteryUserService from '@/vues/backoffice/vues/users/lottery-users/service/LotteryUserService';
 import PageRequest from '@/components/core/PageRequest';
 import PageNavigator from '@/components/page-navigator/PageNavigator.vue';
 import PaginatedContainerVue from '@/components/PaginatedContainerVue';

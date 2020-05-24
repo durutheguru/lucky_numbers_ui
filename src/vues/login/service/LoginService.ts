@@ -1,4 +1,4 @@
-import { Web } from '../../components/util';
+import { Web } from '../../../components/util';
 import store from '@/store';
 import '@/interceptors/login/LoginInterceptor';
 

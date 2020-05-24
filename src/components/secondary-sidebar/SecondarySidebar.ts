@@ -7,7 +7,7 @@ import { Log, Constants } from '@/components/util';
 import { EventBus } from '@/components/core/Event';
 import UserAction from '@/components/core/UserAction';
 
-import LoginService from '@/services/login/LoginService';
+import LoginService from '@/vues/login/service/LoginService';
 
 
 @Component

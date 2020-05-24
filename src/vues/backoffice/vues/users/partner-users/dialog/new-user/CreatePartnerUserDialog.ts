@@ -4,7 +4,7 @@ import BaseVue from '@/components/BaseVue';
 import Modal from '@/components/modal/Modal';
 
 import UserValidatorService from '../../../service/UserValidatorService';
-import LotteryUserService from '@/services/users/LotteryUserService';
+import PartnerUserService from '@/vues/backoffice/vues/users/partner-users/service/PartnerUserService';
 import { Constants } from '@/components/util';
 
 import WithRender from './create-lottery-user-dialog.html';
@@ -16,7 +16,7 @@ import WithRender from './create-lottery-user-dialog.html';
         Modal,
     },
 })
-export default class CreateLotteryUserDialog extends BaseVue {
+export default class CreatePartnerUserDialog extends BaseVue {
 
     @Prop({default: false})
     private visible!: boolean;
@@ -51,7 +51,7 @@ export default class CreateLotteryUserDialog extends BaseVue {
 
         this.loading = true;
 
-        LotteryUserService.createLotteryUser(
+        PartnerUserService.createPartnerUser(
             this.user,
 
             (response: any) => {
@@ -77,5 +77,4 @@ export default class CreateLotteryUserDialog extends BaseVue {
 
 
 }
-
 

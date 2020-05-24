@@ -16,7 +16,7 @@ import WithRender from './lottery-user-details-dialog.html';
         BasicUserDetails,
     },
 })
-export default class LotteryUserDetailsDialog extends BaseVue {
+export default class PartnerUserDetailsDialog extends BaseVue {
 
     @Prop({default: false})
     private visible!: boolean;
