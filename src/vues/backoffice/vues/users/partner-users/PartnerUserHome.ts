@@ -11,6 +11,8 @@ import UserAction from '@/components/core/UserAction';
 import SearchField from '@/components/search-field/SearchField';
 import UserTable from '@/vues/backoffice/components/user-table/UserTable';
 import PageNavigator from '@/components/page-navigator/PageNavigator.vue';
+import CreatePartnerUserDialog from './dialog/new-user/CreatePartnerUserDialog';
+import PartnerUserDetailsDialog from './dialog/user-details/PartnerUserDetailsDialog';
 
 
 import WithRender from './partner-users.html';
@@ -23,6 +25,8 @@ import WithRender from './partner-users.html';
         SearchField,
         UserTable,
         PageNavigator,
+        CreatePartnerUserDialog,
+        PartnerUserDetailsDialog,
     }
 })
 export default class PartnerUserHome extends PaginatedContainerVue {

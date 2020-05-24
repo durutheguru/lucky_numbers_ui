@@ -2,6 +2,7 @@
     <div class="row">
         <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
             <search-field 
+                v-show="hasElements||elements.searchResults"
                 v-on:search-query-update="searchBackOfficeUsers"
                 v-on:search-query-cleared="searchCleared" />
         </section>

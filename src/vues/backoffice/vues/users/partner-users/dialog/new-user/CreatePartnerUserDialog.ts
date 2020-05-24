@@ -7,7 +7,8 @@ import UserValidatorService from '../../../service/UserValidatorService';
 import PartnerUserService from '@/vues/backoffice/vues/users/partner-users/service/PartnerUserService';
 import { Constants } from '@/components/util';
 
-import WithRender from './create-lottery-user-dialog.html';
+import PartnerService from '@/vues/backoffice/vues/partner/service/PartnerService';
+import WithRender from './create-partner-user-dialog.html';
 
 
 @WithRender
@@ -27,6 +28,13 @@ export default class CreatePartnerUserDialog extends BaseVue {
 
     private loading: boolean = false;
 
+
+    private partners: any = {
+        error: '',
+        loading: false,
+        list: [],
+    };
+
     
     private user!: any;
 
@@ -39,6 +47,24 @@ export default class CreatePartnerUserDialog extends BaseVue {
             password: '',
             confirmPassword: '',
         };
+
+        this.loadPartners();
+    }
+
+
+    public loadPartners() {
+        this.partners.loading = true;
+
+        PartnerService.getAllPartners(
+            (response: any) => {
+                this.partners.loading = true;
+                this.partners.list = response.data._embedded.partners;
+            },
+
+            (error: any) => {
+                this.partners.loading = true;
+            }
+        );
     }
 
 

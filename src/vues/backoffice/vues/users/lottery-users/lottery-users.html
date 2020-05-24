@@ -2,7 +2,7 @@
     <div class="row">
         <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
             <search-field 
-                v-if="hasElements"
+                v-show="hasElements||elements.searchResults"
                 v-on:search-query-update="searchLotteryUsers"
                 v-on:search-query-cleared="searchCleared" />
         </section>

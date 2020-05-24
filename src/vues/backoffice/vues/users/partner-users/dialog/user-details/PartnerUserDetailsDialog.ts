@@ -5,7 +5,7 @@ import Modal from '@/components/modal/Modal';
 import { Constants } from '@/components/util';
 import BasicUserDetails from '@/vues/backoffice/components/user-details/BasicUserDetails';
 
-import WithRender from './lottery-user-details-dialog.html';
+import WithRender from './partner-user-details-dialog.html';
 
 
 

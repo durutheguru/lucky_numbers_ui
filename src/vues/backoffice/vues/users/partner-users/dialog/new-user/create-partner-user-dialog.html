@@ -4,7 +4,6 @@
     <div class="row h-padding-big" slot="body">
         <validation-observer ref="observer" tag="form" role="form" v-slot="{ invalid }" @submit.prevent="createUser"
             novalidate>
-            
             <div class="form-group">
                 <label for="nameField">Name</label>
                 <validation-provider rules="required" v-slot="{ invalid }" immediate>
@@ -17,6 +16,18 @@
                 <validation-provider rules="email_required" v-slot="{ invalid }" immediate>
                     <input type="email" class="form-control" id="emailField" v-bind:class="{'invalid-field': invalid}" 
                         placeholder="Enter Email" v-model="user.email" />
+                </validation-provider>
+            </div>
+            <div class="form-group">
+                <label for="partnerField">Partner</label>
+                <validation-provider rules="required" v-slot="{ invalid }" immediate>
+                    <select name="partnerField" class="form-control" v-bind:class="{'invalid-field': invalid}" 
+                        v-model="user.partner">
+                        <option value="" disabled>Please select a Partner</option>
+                        <option v-for="partner in partners.list" v-bind:value="partner._links.self.href">
+                            {{partner.name}}
+                        </option>
+                    </select>
                 </validation-provider>
             </div>
             <div class="form-group">

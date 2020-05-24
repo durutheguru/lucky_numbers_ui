@@ -2,7 +2,7 @@
     <div class="row">
         <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
             <search-field 
-                v-if="hasElements"
+                v-show="hasElements||elements.searchResults"
                 v-on:search-query-update="searchPartnerUsers"
                 v-on:search-query-cleared="searchCleared" />
         </section>
@@ -44,16 +44,16 @@
         </div>
     </div>
 
-    <!-- <lottery-user-details-dialog 
+    <partner-user-details-dialog 
         v-if="dialogOpts.userDetails.visible" 
         v-bind:user="dialogOpts.userDetails.selectedUser"
         v-bind:visible="dialogOpts.userDetails.visible"
-        v-on:close-dialog="hideLotteryUserDetails" />
+        v-on:close-dialog="hidePartnerUserDetails" />
         
-    <create-lottery-user-dialog
+    <create-partner-user-dialog 
         v-if="dialogOpts.createUser.visible"
         v-bind:visible="dialogOpts.createUser.visible"
-        v-on:close-dialog="hideCreateLotteryUser" /> -->
+        v-on:close-dialog="hideCreatePartnerUser" /> 
 
 </div>
 
