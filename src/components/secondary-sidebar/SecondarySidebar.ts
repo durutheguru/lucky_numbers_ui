@@ -1,17 +1,22 @@
 import $ from 'jquery';
 import { Component } from 'vue-property-decorator';
-import WithRender from './secondary-sidebar.html';
 import BaseVue from '../BaseVue';
-
+import NavMenuList from '@/components/nav-menu-list/NavMenuList';
 import { Log, Constants } from '@/components/util';
 import { EventBus } from '@/components/core/Event';
 import UserAction from '@/components/core/UserAction';
 
 import LoginService from '@/vues/login/service/LoginService';
 
+import WithRender from './secondary-sidebar.html';
 
-@Component
+
 @WithRender
+@Component({
+    components: {
+        NavMenuList,
+    },
+})
 export default class SecondarySidebar extends BaseVue {
 
 

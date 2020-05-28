@@ -2,6 +2,7 @@
 // colors
 $default_grey : #CFCFCF;
 $default_dark_grey : #9F9F9F;
+$default_light_grey : #EFEFEF;
 $default_height : 250px;
 $primary_color : #74B093;
 $wine: #812F2F;
@@ -119,6 +120,16 @@ img.logo-img-medium {
 
 .grey-bordered {
   border : 1px solid $default_grey;
+}
+
+.top-bordered {
+  border-top: 1px solid $default_grey;
+  padding-top: 6px;
+}
+
+.bottom-bordered {
+  border-bottom: 1px solid $default_dark_grey;
+  padding-bottom: 6px;
 }
 
 .box-shadowed {
@@ -439,3 +450,133 @@ img.logo-img-medium {
   border: 1px solid $wine !important;
 }
 
+
+.max-width-container {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll !important;
+}
+
+
+// .table{
+//   display: block !important;
+//   overflow-x: auto !important;
+//   width: 100% !important;
+// }
+
+.table-responsive {
+  overflow-y: visible !important;
+}
+
+
+.table-responsive * {
+  overflow-y: visible !important;
+}
+
+
+aside.side-menu {
+  display: none;
+}
+
+#main-content {
+  margin-left: 0px !important;
+}
+
+
+@media screen and (min-width: 1000px) {
+
+  #main-content {
+    margin-left: 250px !important;
+  }
+
+  aside.side-menu {
+    display: block;
+  }
+
+}
+
+.relative {
+  position: relative !important;
+}
+
+@media (max-width: 767px) {
+  .btn-group .dropdown-menu-right {
+      position: static !important;
+      margin-left: -150px;
+      margin-top: 25px;
+      display: -moz-popup;
+  }
+}
+
+// @media (min-width: 768px) {
+//   .table-responsive {
+//       overflow: visible;
+//   }
+// }
+
+
+.col--12 {
+  width: 100%;
+}
+.col--11 {
+  width: 91.66666667%;
+}
+.col--10 {
+  width: 83.33333333%;
+}
+.col--9 {
+  width: 75%;
+}
+.col--8 {
+  width: 66.66666667%;
+}
+.col--7 {
+  width: 58.33333333%;
+}
+.col--6 {
+  width: 50%;
+}
+.col--5 {
+  width: 41.66666667%;
+}
+.col--4 {
+  width: 33.33333333%;
+}
+.col--3 {
+  width: 25%;
+}
+.col--2 {
+  width: 16.66666667%;
+}
+.col--1 {
+  width: 8.33333333%;
+}
+
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+.flex-container-baseline {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  justify-content: left;
+}
+
+
+ul.sub li {
+  padding-left: 32px;
+  padding-bottom: 5px;
+}

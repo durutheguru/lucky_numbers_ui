@@ -1,12 +1,6 @@
 <div class="main-route-content">
-    <div class="row">
-        <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
-            <search-field 
-                v-show="hasElements||elements.searchResults"
-                v-on:search-query-update="searchBackOfficeUsers"
-                v-on:search-query-cleared="searchCleared" />
-        </section>
-        <section v-if="hasElements">
+    <div class="row flex-container-baseline">
+        <section v-if="hasElements" style="flex-grow: 10;">
             <span class="much-larger-font bold-font">{{elements.pageData.totalElements}}</span>
             <span v-if="!elements.searchResults">{{quantity(elements.pageData.totalElements, 'registered Back-Office user')}}</span>
             <span v-if="elements.searchResults">
@@ -14,9 +8,16 @@
                 for <span class="blue">{{elements.searchQuery}}</span>
             </span>
         </section>
+        <section class="route-header-right-container-top-padded-m" 
+            style="flex-grow: 1;">
+            <search-field 
+                v-show="hasElements||elements.searchResults"
+                v-on:search-query-update="searchBackOfficeUsers"
+                v-on:search-query-cleared="searchCleared" />
+        </section>
     </div>
     <div class="row">
-        <div v-if="hasElements">
+        <section v-if="hasElements">
 
             <user-table 
                 v-bind:users="elements"
@@ -28,7 +29,7 @@
                 v-on:previous-page-nav="previous()"
                 v-on:next-page-nav="next()" />
 
-        </div>
+        </section>
         <div v-else>
             <div class="alert alert-block alert-primary fade in" v-if="elements.loading">
                 <strong>Loading</strong> <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>

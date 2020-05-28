@@ -13,6 +13,11 @@
         </li>
     </ul>
 
+    <section class="visible-xs bottom-bordered">
+        <h5 v-if="actions.length" class="side-title">NAVIGATION</h5>
+        <nav-menu-list />
+    </section>
+
     <div v-if="false">
         <h5 class="side-title"> Ongoing Tasks</h5>
         <ul class="p-task tasks-bar">
