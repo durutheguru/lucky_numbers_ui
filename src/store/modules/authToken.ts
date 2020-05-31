@@ -1,5 +1,6 @@
 import Web from '@/components/util/Web';
 import UserAuthContext from '@/components/auth/UserAuthContext';
+import '@/interceptors/auth/AuthCheckInterceptor';
 
 
 const state = {

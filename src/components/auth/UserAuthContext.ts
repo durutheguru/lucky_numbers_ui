@@ -1,5 +1,4 @@
 import { Log, Constants } from '../util';
-import authDescriptors from '@/components/auth/descriptors';
 import AuthContextDescriptor from './descriptors/AuthContextDescriptor';
 import descriptors from '@/components/auth/descriptors';
 

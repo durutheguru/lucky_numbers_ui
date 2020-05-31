@@ -1,12 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import store from '../../store';
-import { Log, Constants } from '.';
-import '@/interceptors/InterceptorRegistry';
+import { Constants } from '.';
 
 
 axios.interceptors.request.use(
     (config: AxiosRequestConfig): any => {
-        const matchingExcludePaths = Constants.excludeApiPaths.filter((value: string, index: number) => {
+        const matchingExcludePaths = Constants.authExcludeApiPaths.filter((value: string, index: number) => {
             config.url = config.url || '';
             return config.url.indexOf(value) > -1;
         });
@@ -20,23 +19,43 @@ axios.interceptors.request.use(
 );
 
 
+export type APISuccessCallback = (response: any) => any;
+export type APIErrorCallback = (error: any) => any;
+
+
 export default class Web {
+
 
     public static BASE_URL: string = process.env.VUE_APP_BASE_URL;
 
+
     public static get(
-        url: string, successCallback: (response: any) => any, errorCallback?: (error: any) => any,
+        url: string, successCallback: APISuccessCallback, errorCallback?: APIErrorCallback,
     ) {
-        axios.get(Web.BASE_URL + url)
+        Web.getAbsolute(Web.BASE_URL + url, successCallback, errorCallback);
+    }
+
+
+    public static getAbsolute(
+        url: string, successCallback: APISuccessCallback, errorCallback?: APIErrorCallback,
+    ) {
+        axios.get(url)
         .then(successCallback)
         .catch(errorCallback);
     }
 
 
     public static post(
-        url: string, data: any, successCallback: (response: any) => any, errorCallback?: (error: any) => any,
+        url: string, data: any, successCallback: APISuccessCallback, errorCallback?: APIErrorCallback,
     ) {
-        axios.post(Web.BASE_URL + url, data)
+        Web.postAbsolute(Web.BASE_URL + url, data, successCallback, errorCallback);
+    }
+
+
+    public static postAbsolute(
+        url: string, data: any, successCallback: APISuccessCallback, errorCallback?: APIErrorCallback,
+    ) {
+        axios.post(url, data)
         .then(successCallback)
         .catch(errorCallback);
     }

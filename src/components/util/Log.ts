@@ -3,12 +3,16 @@ export default class Log {
 
 
     public static info(msg: string) {
-        console.info(msg);
+        if (process.env.NODE_ENV === 'development') {
+            console.info(msg);
+        }
     }
 
 
     public static error(err: string) {
-        console.error(err);
+        if (process.env.NODE_ENV === 'development') {
+            console.error(err);
+        }
     }
 
 
