@@ -18,10 +18,8 @@ spec:
       containers:
       - name: lucky-numberz-front-end-service
         image: durutheguru/{{image-placeholder}}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - name: http
           containerPort: 80
         
-
-
