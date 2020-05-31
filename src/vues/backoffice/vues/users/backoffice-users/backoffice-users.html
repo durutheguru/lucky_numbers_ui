@@ -1,12 +1,14 @@
 <div class="main-route-content">
     <div class="row flex-container-baseline">
-        <section v-if="hasElements" style="flex-grow: 10;">
-            <span class="much-larger-font bold-font">{{elements.pageData.totalElements}}</span>
-            <span v-if="!elements.searchResults">{{quantity(elements.pageData.totalElements, 'registered Back-Office user')}}</span>
-            <span v-if="elements.searchResults">
-                {{quantity(elements.pageData.totalElements, 'result')}} 
-                for <span class="blue">{{elements.searchQuery}}</span>
-            </span>
+        <section style="flex-grow: 10;">
+            <div v-if="hasElements">
+                <span class="much-larger-font bold-font">{{elements.pageData.totalElements}}</span>
+                <span v-if="!elements.searchResults">{{quantity(elements.pageData.totalElements, 'registered Back-Office user')}}</span>
+                <span v-if="elements.searchResults">
+                    {{quantity(elements.pageData.totalElements, 'result')}} 
+                    for <span class="blue">{{elements.searchQuery}}</span>
+                </span>
+            </div>
         </section>
         <section class="route-header-right-container-top-padded-m" 
             style="flex-grow: 1;">

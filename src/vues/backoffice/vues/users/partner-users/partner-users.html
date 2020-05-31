@@ -1,18 +1,21 @@
 <div class="main-route-content">
-    <div class="row">
-        <section class="col-md-2 pull-right route-header-right-container-top-padded-m">
+    <div class="row flex-container-baseline">
+        <section style="flex-grow: 10;">
+            <div v-if="hasElements">
+                <span class="much-larger-font bold-font">{{elements.pageData.totalElements}}</span>
+                <span v-if="!elements.searchResults">{{quantity(elements.pageData.totalElements, 'registered Partner user')}}</span>
+                <span v-if="elements.searchResults">
+                    {{quantity(elements.pageData.totalElements, 'result')}} 
+                    for <span class="blue">{{elements.searchQuery}}</span>
+                </span>
+            </div>
+        </section>
+        <section class="route-header-right-container-top-padded-m" 
+            style="flex-grow: 1;">
             <search-field 
                 v-show="hasElements||elements.searchResults"
                 v-on:search-query-update="searchPartnerUsers"
                 v-on:search-query-cleared="searchCleared" />
-        </section>
-        <section v-if="hasElements">
-            <span class="much-larger-font bold-font">{{elements.pageData.totalElements}}</span>
-            <span v-if="!elements.searchResults">{{quantity(elements.pageData.totalElements, 'registered Partner user')}}</span>
-            <span v-if="elements.searchResults">
-                {{quantity(elements.pageData.totalElements, 'result')}} 
-                for <span class="blue">{{elements.searchQuery}}</span>
-            </span>
         </section>
     </div>
     <div class="row">
