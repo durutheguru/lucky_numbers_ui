@@ -1,10 +1,12 @@
 import Vue from 'vue';
-import VueRouter, { Route } from 'vue-router';
+import VueRouter from 'vue-router';
 
 import Login from '../vues/login/Login.vue';
+import Users from '@/vues/backoffice/vues/users/Users.vue';
 import BackOffice from '../vues/backoffice/BackOffice.vue';
 
 import guard from './util/guard';
+import afterRouteScriptLoader from './util/afterRouteScriptLoader';
 
 
 Vue.use(VueRouter);
@@ -26,18 +28,23 @@ const routes = [
     component: BackOffice,
     children: [
       {
-        path: '/users',
+        path: 'users',
+        name: 'Users',
+        component: Users,
         children: [
           {
-            path: '/back-office'
+            path: 'back-office',
+            component: () => import('@/vues/backoffice/vues/users/backoffice-users/BackOfficeUsers.vue'),
           },
-
+    
           {
-            path: '/partner'
+            path: 'partner',
+            component: () => import('@/vues/backoffice/vues/users/partner-users/PartnerUsers.vue'),
           },
-
+    
           {
-            path: '/lottery'
+            path: 'lottery',
+            component: () => import('@/vues/backoffice/vues/users/lottery-users/LotteryUsers.vue')
           },
         ]
       }
@@ -52,10 +59,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach(guard);
-router.afterEach((to: Route, from: Route) => {
-  const vendorJS = document.createElement('script');
-  vendorJS.setAttribute('src', '/compiled/js/compile_000.js');
-  document.body.appendChild(vendorJS);
-});
+router.afterEach(afterRouteScriptLoader);
 
 export default router;

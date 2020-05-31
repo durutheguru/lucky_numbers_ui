@@ -1,11 +1,12 @@
 {
     "default": {
+        "status": 200,
+
         "headers": {
-            "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIiLCJhdXRob3JpemF0aW9ucyI6WyJCQUNLX09GRklDRV9VU0VSIl0sImV4cCI6MTU4NjY0MzE4OX0.xX5Ymy1A1MBECnN_nmfEbaS2J-dOsSOKxGUyU2WukKbZ4Z2vVwMYac33jdZv0YR3wPJbkJkM-jS_c7FAG3QWvg"
+            "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdXBlcnVzZXIiLCJhdXRob3JpemF0aW9ucyI6WyJCQUNLX09GRklDRV9VU0VSIl0sImV4cCI6MTU5MDY5OTc2OH0.BVm1ys3FfEMWZp38E5EdMfvKM9S7vSu4yX59eEO8WoFziRayPmo24ajbsek5SROX-dpBccJdp-XgN_y6X8ySNQ"
         },
 
         "body": {
-            
         }
     }
 }
