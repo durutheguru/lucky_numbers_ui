@@ -51,6 +51,12 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
 
 
     public mounted() {
+        this.triggerRouteUpdate();
+        this.elements.initialize();
+    }
+
+
+    public triggerRouteUpdate() {
         EventTrigger.trigger(
             Constants.routeUpdateEvent, 
 
@@ -74,8 +80,6 @@ export default class BackOfficeUsersHome extends PaginatedContainerVue {
                 ],
             }
         );
-
-        this.elements.initialize();
     }
 
 

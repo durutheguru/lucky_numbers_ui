@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import Login from '../vues/login/Login.vue';
 import Users from '@/vues/backoffice/vues/users/Users.vue';
 import BackOffice from '../vues/backoffice/BackOffice.vue';
+import Partner from '@/vues/backoffice/vues/partner/Partner.vue';
 
 import guard from './util/guard';
 import afterRouteScriptLoader from './util/afterRouteScriptLoader';
@@ -47,7 +48,13 @@ const routes = [
             component: () => import('@/vues/backoffice/vues/users/lottery-users/LotteryUsers.vue')
           },
         ]
-      }
+      },
+
+      {
+        path: 'partner',
+        name: 'Partners',
+        component: Partner,
+      },
     ]
   },
 
