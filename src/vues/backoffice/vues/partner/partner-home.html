@@ -69,12 +69,15 @@
             v-bind:user="dialogOpts.userDetails.selectedUser"
             v-bind:visible="dialogOpts.userDetails.visible"
             v-on:close-dialog="hideBackOfficeUserDetails" />
-    
-        <CreateBackOfficeUserDialog
-            v-if="dialogOpts.createUser.visible"
-            v-bind:visible="dialogOpts.createUser.visible"
-            v-on:close-dialog="hideCreateBackOfficeUser" /> -->
+         -->
+
+        <create-partner-dialog
+            v-if="dialogOpts.createPartner.visible"
+            v-bind:visible="dialogOpts.createPartner.visible"
+            v-on:close-dialog="hideCreatePartnerDialog" />
             
     </div>
         
 </div>
+
+

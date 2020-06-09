@@ -11,6 +11,7 @@ import { Constants } from '@/components/util';
 import UserAction from '@/components/core/UserAction';
 import PartnerService from './service/PartnerService';
 import PageRequest from '@/components/core/PageRequest';
+import CreatePartnerDialog from './dialog/new-partner/CreatePartnerDialog';
 
 
 
@@ -19,6 +20,7 @@ import PageRequest from '@/components/core/PageRequest';
     components: {
         SearchField,
         PageNavigator,
+        CreatePartnerDialog,
     }
 })
 export default class PartnerHome extends PaginatedContainerVue {
@@ -69,6 +71,12 @@ export default class PartnerHome extends PaginatedContainerVue {
 
     public showCreatePartnerDialog() {
         this.dialogOpts.createPartner.visible = true;
+    }
+
+
+    public hideCreatePartnerDialog() {
+        this.dialogOpts.createPartner.visible = false;
+        this.loadPartners();
     }
 
 

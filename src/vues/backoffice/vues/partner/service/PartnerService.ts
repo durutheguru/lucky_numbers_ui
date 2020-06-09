@@ -6,6 +6,13 @@ import { APISuccessCallback, APIErrorCallback} from '@/components/util/Web';
 export default class PartnerService {
 
 
+    public static savePartner(
+        partner: any, successHandler: APISuccessCallback, errorHandler?: APIErrorCallback
+    ) {
+        Web.post('/api/v1/partner', partner, successHandler, errorHandler);
+    }
+
+
     public static getPartners(
         pageRequest: PageRequest,
         successHandler: APISuccessCallback, 
