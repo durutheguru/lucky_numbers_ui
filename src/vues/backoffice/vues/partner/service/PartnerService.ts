@@ -38,6 +38,17 @@ export default class PartnerService {
     }
 
 
+    public static getAllPartnersMinified(
+        successHandler: APISuccessCallback, 
+        errorHandler: APIErrorCallback
+    ) {
+        Web.get(
+            '/api/v1/partner/search/findBy?projection=partnerMinDetails&sort=name,asc', 
+            successHandler, errorHandler
+        );
+    }
+
+
     public static searchPartnerNames(
         query: string, 
         pageRequest: PageRequest,

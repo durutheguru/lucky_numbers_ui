@@ -1,31 +1,13 @@
 import { Route } from 'vue-router';
 
+import { Log } from '@/components/util';
 
-function loadJS() {
-    const vendorJS = document.createElement('script');
-    vendorJS.setAttribute('src', '/compiled/js/compile_000.js');
-    document.body.appendChild(vendorJS);
-
-    document.body.addEventListener('mousewheel', (e) => {
-        e.preventDefault();
-    }, { passive: false });
-}
-
-
-function loadCSS() {
-    const head = document.getElementsByTagName('head')[0];
-    const cssnode = document.createElement('link');
-
-    cssnode.type = 'text/css';
-    cssnode.rel = 'stylesheet';
-    cssnode.href = '/compiled/css/compile_000.css';
-
-    head.appendChild(cssnode);
-}
+import './include/jsFileLoader';
+import './include/cssFileLoader';
+import './include/background';
 
 
 export default function(to: Route, from: Route) {
-    loadJS();
-    loadCSS();
+    Log.info('Executing After Route Scripts Loader.');
 }
 

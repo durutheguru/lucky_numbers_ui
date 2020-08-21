@@ -1,16 +1,16 @@
 import { Component } from 'vue-property-decorator';
-import WithRender from './partner-home.html';
+import WithRender from './campaign-home.html';
 
+import PaginatedContainerVue from '@/components/PaginatedContainerVue';
+import PageDataModel from '@/components/core/PageDataModel';
 import SearchField from '@/components/search-field/SearchField';
 import PageNavigator from '@/components/page-navigator/PageNavigator.vue';
-import PageDataModel from '@/components/core/PageDataModel';
-import PaginatedContainerVue from '@/components/PaginatedContainerVue';
+import CampaignService from './service/CampaignService';
+import PageRequest from '@/components/core/PageRequest';
+import CreateCampaignDialog from '../campaign/dialog/new-campaign/CreateCampaignDialog';
 import { EventTrigger } from '@/components/core/Event';
 import { Constants } from '@/components/util';
 import UserAction from '@/components/core/UserAction';
-import PartnerService from './service/PartnerService';
-import PageRequest from '@/components/core/PageRequest';
-import CreatePartnerDialog from './dialog/new-partner/CreatePartnerDialog';
 
 
 
@@ -19,47 +19,48 @@ import CreatePartnerDialog from './dialog/new-partner/CreatePartnerDialog';
     components: {
         SearchField,
         PageNavigator,
-        CreatePartnerDialog,
-    }
+        CreateCampaignDialog,
+    },
 })
-export default class PartnerHome extends PaginatedContainerVue {
+export default class CampaignHome extends PaginatedContainerVue {
+
 
     private dialogOpts: any = {
-        partnerDetails: {
+        
+        createCampaign: {
             visible: false,
-            selectedPartner: {},
         },
 
-        createPartner: {
-            visible: false,
-        },
     };
 
 
     private elements: PageDataModel = new PageDataModel(
-        'partners',
-        this.loadPartners.bind(this),
-        this.searchPartners.bind(this)
+        'campaigns',
+        this.loadCampaigns.bind(this),
+        this.searchCampaigns.bind(this)
     );
 
 
     public mounted() {
-        this.triggerRouteUpdate();
         this.elements.initialize();
-    }
-
-
-    public triggerRouteUpdate() {
         EventTrigger.trigger(
-            Constants.routeUpdateEvent, 
+            Constants.routeUpdateEvent,
 
             {
                 actions: [
                     new UserAction(
-                        'Add Partner',
+                        'Add Campaign',
                         'fa-plus',
                         () => {
-                            this.showCreatePartnerDialog();
+                            this.showCreateCampaignDialog();
+                        }
+                    ),
+
+                    new UserAction(
+                        'Approve Campaign',
+                        'fa-tasks',
+                        () => {
+                            this.$router.push({path: '/back-office/campaign/awaiting_approval'});
                         }
                     )
                 ]
@@ -68,21 +69,10 @@ export default class PartnerHome extends PaginatedContainerVue {
     }
 
 
-    public showCreatePartnerDialog() {
-        this.dialogOpts.createPartner.visible = true;
-    }
-
-
-    public hideCreatePartnerDialog() {
-        this.dialogOpts.createPartner.visible = false;
-        this.loadPartners();
-    }
-
-
-    private loadPartners(url?: string) {
+    private loadCampaigns(url?: string) {
         this.elements.setLoading(true);
 
-        PartnerService.getPartners(
+        CampaignService.getCampaigns(
             new PageRequest(
                 this.elements.pageData.number, 
                 this.elements.pageData.size,
@@ -96,17 +86,17 @@ export default class PartnerHome extends PaginatedContainerVue {
     }
 
 
-    private searchPartners(query: string, url?: string) {
+    private searchCampaigns(query: string, url?: string) {
         this.elements.searchQuery = query;
 
         this.elements.clearPageData();
         this.elements.setLoading(true);
 
-        PartnerService.searchPartnerNames(
-            this.elements.searchQuery, 
+        CampaignService.searchCampaigns(
+            query, 
 
             new PageRequest(
-                this.elements.pageData.number, 
+                this.elements.pageData.number,
                 this.elements.pageData.size,
                 url
             ),
@@ -115,6 +105,31 @@ export default class PartnerHome extends PaginatedContainerVue {
 
             (error: any) => this.handleErrorResponse(error)
         );
+    }
+
+
+    public showCreateCampaignDialog() {
+        this.dialogOpts.createCampaign.visible = true;
+    }
+
+
+    public hideCreateCampaignDialog() {
+        this.dialogOpts.createCampaign.visible = false;
+    }
+
+
+    private getApprovalClass(status: string) {
+        switch (status) {
+            case 'ACTIVE':
+            case 'APPROVED':
+                return 'bg-success';
+            case 'COMPLETED':
+            case 'AWAITING_APPROVAL':
+                return 'bg-info';
+            case 'CANCELLED':
+            case 'DISAPPROVED':
+                return 'bg-important';
+        }
     }
 
 
@@ -132,3 +147,4 @@ export default class PartnerHome extends PaginatedContainerVue {
 
 
 }
+

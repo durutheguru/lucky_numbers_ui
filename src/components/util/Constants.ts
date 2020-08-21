@@ -1,6 +1,7 @@
 
 export default class Constants {
 
+
     // Event Related Constants
     public static dialogClosedEvent: string = 'close-dialog';
 
@@ -23,7 +24,6 @@ export default class Constants {
     ];
 
 
-
     // Regex constants
     public static regexps: any = {
         AUTH_TOKEN: /^Bearer .+\.(.*)(\..+)+$/,
@@ -31,13 +31,23 @@ export default class Constants {
     };
 
 
-
     // Misc
     public static defaultPagination: any = {
         page: 0,
-        size: 10
+        size: 10,
     };
 
 
+    public static campaignStages: string[] = [
+        'FIRST', 'SECOND', 'THIRD',
+    ];
+
+    
+    public static campaignTypes: string[] = [
+        'SINGLE', 'RECURRING'
+    ];
+
+
 }
+
 

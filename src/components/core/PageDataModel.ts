@@ -1,4 +1,5 @@
-import { Constants, Log } from '../util';
+import { Log, Util } from '../util';
+import Constants from '../util/Constants';
 
 
 const defaultPageData = {
@@ -23,7 +24,7 @@ export default class PageDataModel {
     public loading: boolean = false;
 
     public error: string = '';
-    
+
     public list: any = [];
 
     public pageData: any = defaultPageData;
@@ -35,13 +36,15 @@ export default class PageDataModel {
 
     constructor(
         private entityKeyName: string, // string value used to extract entity from page response
-        private loadEntityFunction: (url?: string) => void, // function to invoke to load entity
-        private searchEntityFunction?: (query: string, url?: string) => void // function to invoke when searching entity
+        public loadEntityFunction?: (url?: string) => void, // function to invoke to load entity
+        public searchEntityFunction?: (query: string, url?: string) => void // function to invoke when searching entity
     ) { }
 
 
     public initialize() {
-        this.loadEntityFunction();
+        if (!!this.loadEntityFunction) {
+            this.loadEntityFunction();
+        }
     }
 
 
@@ -60,6 +63,11 @@ export default class PageDataModel {
     }
 
 
+    public setError(error: string) {
+        this.error = error;
+    }
+
+
     public assignResponse(response: any, isSearchResult: boolean = false) {
         this.searchResults = isSearchResult;
         this.list = response.data._embedded[this.entityKeyName];
@@ -71,10 +79,12 @@ export default class PageDataModel {
 
     public next() {
         if (!this.searchResults) {
-            Log.info('Loading Next ' + this.entityKeyName + ' ...');
-            this.loadEntityFunction(
-                this.pageData.next.href
-            );
+            if (!!this.loadEntityFunction) {
+                Log.info('Loading Next ' + this.entityKeyName + ' ...');
+                this.loadEntityFunction(
+                    this.pageData.next.href
+                );
+            }
         } else {
             Log.info('Searching Next ' + this.entityKeyName + ' ...');
             if (!!this.searchEntityFunction) {
@@ -88,10 +98,12 @@ export default class PageDataModel {
 
     public previous() {
         if (!this.searchResults) {
-            Log.info('Loading Previous ' + this.entityKeyName + ' ...');
-            this.loadEntityFunction(
-                this.pageData.previous.href
-            );
+            if (!!this.loadEntityFunction) {
+                Log.info('Loading Previous ' + this.entityKeyName + ' ...');
+                this.loadEntityFunction(
+                    this.pageData.previous.href
+                );
+            }
         } else {
             Log.info('Searching Previous ' + this.entityKeyName + ' ...');
             if (!!this.searchEntityFunction) {
@@ -104,7 +116,6 @@ export default class PageDataModel {
 
 
     public hasElements(): boolean {
-        Log.info('Total Elements: ' + this.pageData.totalElements);
         return !!this.pageData.totalElements;
     }
 

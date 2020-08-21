@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import store from '../../store';
-import { Constants } from '.';
+import { Constants, Log } from '.';
 
 
 axios.interceptors.request.use(
@@ -21,6 +21,12 @@ axios.interceptors.request.use(
 
 export type APISuccessCallback = (response: any) => any;
 export type APIErrorCallback = (error: any) => any;
+export type SSECallback = (event: any) => void;
+
+
+function isSSECallback(obj: SSECallback): obj is SSECallback {
+    return !!(obj as SSECallback);
+}
 
 
 export default class Web {
@@ -63,6 +69,30 @@ export default class Web {
 
     public static navigate(url: string) {
         window.location.href = url;
+    }
+
+
+    public static sse(
+        url: string, eventHandlerObject: any, messageCallback: SSECallback | null): EventSource {
+        const eventSource = new EventSource(Web.BASE_URL + url);
+
+        for (const handler in eventHandlerObject) {
+            if (isSSECallback(eventHandlerObject[handler])) {
+                Log.info(`Handler ${handler} is SSE Callback`);
+
+                eventSource.addEventListener(
+                    handler, eventHandlerObject[handler]
+                );
+            } else {
+                Log.info(`Handler ${handler} not SSE Callback`);
+            }
+        }
+
+        if (messageCallback) {
+            eventSource.onmessage = messageCallback;
+        }
+
+        return eventSource;
     }
 
 

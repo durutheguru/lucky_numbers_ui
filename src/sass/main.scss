@@ -3,16 +3,20 @@
 $default_grey : #CFCFCF;
 $default_dark_grey : #9F9F9F;
 $default_light_grey : #EFEFEF;
-$default_height : 250px;
 $primary_color : #74B093;
 $wine: #812F2F;
+$app_blue: #445DA1;
 
 
 // dimensions
+$v_small_length: 2px;
 $small_length : 7px;
 $medium_length : 15px;
 $big_length : 30px;
 $v_big_length: 70px;
+$default_height : 250px;
+$default_dialog_height : 500px;
+
 
 #app {
   width: 100%;
@@ -36,7 +40,7 @@ $v_big_length: 70px;
 }
 
 .blue {
-  color : #445DA1;
+  color : $app_blue;
 }
 
 .default-h-padding {
@@ -102,6 +106,11 @@ i.mega-fa {
   font-size: 0.85em;
 }
 
+.smaller-font {
+  font-size: 0.65em;
+}
+
+
 img.logo-img-medium {
   width : 50px;
   height : 50px;
@@ -136,6 +145,10 @@ img.logo-img-medium {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.left-padding-medium {
+  padding-left: $medium_length;
+}
+
 .h-margin-medium {
   margin-left: $medium_length;
   margin-right: $medium_length;
@@ -149,6 +162,11 @@ img.logo-img-medium {
 .h-padding-small {
   padding-left : $small_length;
   padding-right : $small_length;
+}
+
+.h-padding-v-small {
+  padding-left: $v_small_length;
+  padding-right: $v_small_length;
 }
 
 .h-padding-medium {
@@ -249,6 +267,10 @@ img.logo-img-medium {
   overflow: hidden;
   margin-top: 14px;
   padding-top: 20px;
+}
+
+.left-bordered {
+  border-left: 1px solid #DDD;
 }
 
 
@@ -353,9 +375,35 @@ img.logo-img-medium {
   margin-left: 5px;
 }
 
+.white-btn-blue:hover {
+  color: white !important;
+  background: $app_blue;
+}
+
+.white-btn-blue {
+  color: $app_blue;
+  background: white;
+}
+
+.white-btn-wine {
+  color: $wine;
+  background: white;
+}
+
+.white-btn-wine:hover {
+  color: white !important;
+  background: $wine;
+}
+
 .transparent-bg {
   background: rgba(255, 255, 255, 0) !important;
 }
+
+
+.grey-bg-transparent {
+  background: rgba(200, 200, 200, 0.8);
+}
+
 
 .pointer {
   cursor: pointer;
@@ -398,6 +446,11 @@ img.logo-img-medium {
 
 .modal-medium {
   width: 500px;
+}
+
+
+.modal-big {
+  width: 800px;
 }
 
 
@@ -472,6 +525,22 @@ img.logo-img-medium {
 .table-responsive * {
   overflow-y: visible !important;
 }
+
+
+.dialog-wizard-main-content-container {
+  height: $default_dialog_height;
+  max-height: $default_dialog_height;
+  overflow-y: scroll;
+}
+
+
+.round-border {
+  border-radius: 4px;
+  border: 1px solid #EFEFEF;
+}
+
+
+
 
 
 aside.side-menu {

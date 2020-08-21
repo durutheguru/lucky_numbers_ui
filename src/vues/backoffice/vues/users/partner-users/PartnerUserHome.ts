@@ -27,7 +27,7 @@ import WithRender from './partner-users.html';
         PageNavigator,
         CreatePartnerUserDialog,
         PartnerUserDetailsDialog,
-    }
+    },
 })
 export default class PartnerUserHome extends PaginatedContainerVue {
 
