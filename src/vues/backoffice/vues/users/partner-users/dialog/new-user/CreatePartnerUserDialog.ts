@@ -57,12 +57,12 @@ export default class CreatePartnerUserDialog extends BaseVue {
 
         PartnerService.getAllPartners(
             (response: any) => {
-                this.partners.loading = true;
+                this.partners.loading = false;
                 this.partners.list = response.data._embedded.partners;
             },
 
             (error: any) => {
-                this.partners.loading = true;
+                this.partners.loading = false;
             }
         );
     }

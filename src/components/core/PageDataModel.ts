@@ -1,4 +1,39 @@
-import { Constants, Log } from '../util';
+import { Util } from '../util';
+import Log from '@/components/util/Log';
+import Constants from '../util/Constants';
+
+
+const defaultPageModel = {
+
+    loading: false,
+
+    error: '',
+
+    list: [],
+
+    entityKeyName: '',
+
+    pageData: {
+
+        next: {},
+    
+        previous: {},
+    
+        number: Constants.defaultPagination.page,
+    
+        size: Constants.defaultPagination.size,
+    
+        totalElements: 0,
+    
+        totalPages: 0,
+    
+    },
+
+    searchResults: false,
+
+    searchQuery: '',
+
+};
 
 
 const defaultPageData = {
@@ -23,7 +58,7 @@ export default class PageDataModel {
     public loading: boolean = false;
 
     public error: string = '';
-    
+
     public list: any = [];
 
     public pageData: any = defaultPageData;
@@ -35,13 +70,15 @@ export default class PageDataModel {
 
     constructor(
         private entityKeyName: string, // string value used to extract entity from page response
-        private loadEntityFunction: (url?: string) => void, // function to invoke to load entity
-        private searchEntityFunction?: (query: string, url?: string) => void // function to invoke when searching entity
+        public loadEntityFunction?: (url?: string) => void, // function to invoke to load entity
+        public searchEntityFunction?: (query: string, url?: string) => void // function to invoke when searching entity
     ) { }
 
 
     public initialize() {
-        this.loadEntityFunction();
+        if (!!this.loadEntityFunction) {
+            this.loadEntityFunction();
+        }
     }
 
 
@@ -60,6 +97,11 @@ export default class PageDataModel {
     }
 
 
+    public setError(error: string) {
+        this.error = error;
+    }
+
+
     public assignResponse(response: any, isSearchResult: boolean = false) {
         this.searchResults = isSearchResult;
         this.list = response.data._embedded[this.entityKeyName];
@@ -71,10 +113,12 @@ export default class PageDataModel {
 
     public next() {
         if (!this.searchResults) {
-            Log.info('Loading Next ' + this.entityKeyName + ' ...');
-            this.loadEntityFunction(
-                this.pageData.next.href
-            );
+            if (!!this.loadEntityFunction) {
+                Log.info('Loading Next ' + this.entityKeyName + ' ...');
+                this.loadEntityFunction(
+                    this.pageData.next.href
+                );
+            }
         } else {
             Log.info('Searching Next ' + this.entityKeyName + ' ...');
             if (!!this.searchEntityFunction) {
@@ -88,10 +132,12 @@ export default class PageDataModel {
 
     public previous() {
         if (!this.searchResults) {
-            Log.info('Loading Previous ' + this.entityKeyName + ' ...');
-            this.loadEntityFunction(
-                this.pageData.previous.href
-            );
+            if (!!this.loadEntityFunction) {
+                Log.info('Loading Previous ' + this.entityKeyName + ' ...');
+                this.loadEntityFunction(
+                    this.pageData.previous.href
+                );
+            }
         } else {
             Log.info('Searching Previous ' + this.entityKeyName + ' ...');
             if (!!this.searchEntityFunction) {
@@ -104,7 +150,6 @@ export default class PageDataModel {
 
 
     public hasElements(): boolean {
-        Log.info('Total Elements: ' + this.pageData.totalElements);
         return !!this.pageData.totalElements;
     }
 
@@ -116,6 +161,24 @@ export default class PageDataModel {
 
     public canPrevious(): boolean {
         return !!this.pageData.previous.href;
+    }
+
+
+    public static newModel(entity: string): any {
+        return  { 
+            ...defaultPageModel,
+
+            entityKeyName: entity
+        };
+    }
+
+
+    public static assignModelData(model: any, response: any, isSearchResult: boolean = false) {
+        model.searchResults = isSearchResult;
+        model.list = response.data._embedded[model.entityKeyName];
+        model.pageData = response.data.page;
+        model.pageData.next = response.data._links.next || {};
+        model.pageData.previous = response.data._links.prev || {};
     }
 
 

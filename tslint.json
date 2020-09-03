@@ -27,6 +27,7 @@
         "typeLiterals": "ignore"
       }
     }],
+    "no-bitwise": false,
     "member-ordering": [false]
   }
 }

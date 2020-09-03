@@ -125,5 +125,20 @@ export default class Util {
         return dest;
     }
 
+    public static uuid(): string {
+        return ('' + 1e7 + -1e3 + -4e3 + -8e3 + -1e11).replace(
+                /1|0/g, 
+
+                () => { 
+                    return (0 | Math.random() * 16).toString(16) ;
+                }
+            );
+    }
+
+
+    public static refresh(obj: any): any {
+        return JSON.parse(JSON.stringify(obj));
+    }
+
 
 }
