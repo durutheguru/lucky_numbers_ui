@@ -1,5 +1,39 @@
-import { Log, Util } from '../util';
+import { Util } from '../util';
+import Log from '@/components/util/Log';
 import Constants from '../util/Constants';
+
+
+const defaultPageModel = {
+
+    loading: false,
+
+    error: '',
+
+    list: [],
+
+    entityKeyName: '',
+
+    pageData: {
+
+        next: {},
+    
+        previous: {},
+    
+        number: Constants.defaultPagination.page,
+    
+        size: Constants.defaultPagination.size,
+    
+        totalElements: 0,
+    
+        totalPages: 0,
+    
+    },
+
+    searchResults: false,
+
+    searchQuery: '',
+
+};
 
 
 const defaultPageData = {
@@ -127,6 +161,24 @@ export default class PageDataModel {
 
     public canPrevious(): boolean {
         return !!this.pageData.previous.href;
+    }
+
+
+    public static newModel(entity: string): any {
+        return  { 
+            ...defaultPageModel,
+
+            entityKeyName: entity
+        };
+    }
+
+
+    public static assignModelData(model: any, response: any, isSearchResult: boolean = false) {
+        model.searchResults = isSearchResult;
+        model.list = response.data._embedded[model.entityKeyName];
+        model.pageData = response.data.page;
+        model.pageData.next = response.data._links.next || {};
+        model.pageData.previous = response.data._links.prev || {};
     }
 
 

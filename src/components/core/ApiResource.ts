@@ -1,5 +1,14 @@
 
 
+const plainResource = {
+    error: '',
+
+    loading: false,
+
+    data: {},
+};
+
+
 export default class ApiResource {
 
 
@@ -16,6 +25,13 @@ export default class ApiResource {
         return new ApiResource(
             '', false, {}
         );
+    }
+
+
+    public static plain() {
+        return {
+            ...plainResource,
+        };
     }
 
 

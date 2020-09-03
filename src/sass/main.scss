@@ -4,6 +4,7 @@ $default_grey : #CFCFCF;
 $default_dark_grey : #9F9F9F;
 $default_light_grey : #EFEFEF;
 $primary_color : #74B093;
+$primary_color_lighter : rgb(83, 136, 111, 0.5);
 $wine: #812F2F;
 $app_blue: #445DA1;
 
@@ -41,6 +42,18 @@ $default_dialog_height : 500px;
 
 .blue {
   color : $app_blue;
+}
+
+.grey-bg {
+  background-color: $default_grey;
+}
+
+.primary-color-lighter-bg {
+  background-color: $primary_color_lighter;
+}
+
+.dark-grey-bg {
+  background-color: $default_dark_grey;
 }
 
 .default-h-padding {
@@ -184,6 +197,10 @@ img.logo-img-medium {
   padding-right : 20px;
 }
 
+.padding-medium {
+  padding : $medium_length $medium_length;
+}
+
 
 .v-margin-top-v-big {
   margin-top: $v_big_length;
@@ -201,6 +218,13 @@ img.logo-img-medium {
 .margin-top-m {
   margin-top : $medium_length;
 }
+
+
+.v-margin-small {
+  margin-top: $medium_length;
+  margin-bottom: $medium_length;
+}
+
 
 .v-padding-medium {
   padding-top : $medium_length;
@@ -281,6 +305,22 @@ img.logo-img-medium {
 }
 
 
+.bottom-anchored-in-parent {
+  position: absolute;
+  bottom: 0;
+}
+
+
+.relative {
+  position: relative;
+}
+
+
+// .campaign-display-card {
+//   position: relative;
+// }
+
+
 .secondary-sidebar-toggle {
   position: absolute;
   top: 0px;
@@ -335,6 +375,26 @@ img.logo-img-medium {
   z-index: 0;
   visibility: hidden;
   background-color: #222222;
+}
+
+
+a.logo_white {
+  font-size: 21px;
+  color: #FFF;
+  float: left;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+
+
+.primary_color_bg {
+  background-color: $primary_color;
+  color: #FFF;
+}
+
+
+.primary_color_bg a {
+  color: #FFF;
 }
 
 
@@ -539,15 +599,21 @@ img.logo-img-medium {
   border: 1px solid #EFEFEF;
 }
 
-
-
-
+.round-border-primary-color {
+  border-radius: 4px;
+  border: 1px solid $primary_color;
+}
 
 aside.side-menu {
   display: none;
 }
 
 #main-content {
+  margin-left: 0px !important;
+}
+
+
+#main-content-lottery {
   margin-left: 0px !important;
 }
 

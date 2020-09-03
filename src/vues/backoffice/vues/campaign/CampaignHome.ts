@@ -119,17 +119,7 @@ export default class CampaignHome extends PaginatedContainerVue {
 
 
     private getApprovalClass(status: string) {
-        switch (status) {
-            case 'ACTIVE':
-            case 'APPROVED':
-                return 'bg-success';
-            case 'COMPLETED':
-            case 'AWAITING_APPROVAL':
-                return 'bg-info';
-            case 'CANCELLED':
-            case 'DISAPPROVED':
-                return 'bg-important';
-        }
+        return CampaignService.getCampaignStatusClass(status);
     }
 
 

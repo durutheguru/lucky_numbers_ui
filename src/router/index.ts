@@ -2,10 +2,13 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Login from '../vues/login/Login.vue';
+
 import Users from '@/vues/backoffice/vues/users/Users.vue';
 import BackOffice from '../vues/backoffice/BackOffice.vue';
 import Partner from '@/vues/backoffice/vues/partner/Partner.vue';
 import Campaign from '@/vues/backoffice/vues/campaign/Campaign.vue';
+
+import Lottery from '@/vues/lottery/Lottery.vue';
 
 import guard from './util/guard';
 import afterRouteScriptLoader from './util/afterRouteScriptLoader';
@@ -74,10 +77,23 @@ const routes = [
   {
     path: '/lottery',
     name: 'Lottery',
-    component: ,
+    component: Lottery,
     meta: {
       skipAuth: true,
     },
+    children: [
+      {
+        path: '',
+        name: 'LotteryHome',
+        component: () => import('@/vues/lottery/vues/list/LotteryHome.vue'),
+      },
+
+      {
+        path: ':id',
+        name: 'LotteryDetail',
+        component: () => import('@/vues/lottery/vues/details/LotteryDetail.vue'),
+      },
+    ]
   }
 
 ];

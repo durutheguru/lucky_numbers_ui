@@ -16,8 +16,6 @@
     })
     export default class Lottery extends Vue {
 
-
-
     }
 
 </script>
