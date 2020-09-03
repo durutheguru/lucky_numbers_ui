@@ -3,6 +3,10 @@ import AuthContextDescriptor from './descriptors/AuthContextDescriptor';
 import descriptors from '@/components/auth/descriptors';
 
 
+/**
+ * UserAuthContext class encapsulates all the information known about 
+ * a user on successful authorisation.. 
+ */
 export default class UserAuthContext {
 
     public static instance: UserAuthContext | null = null;

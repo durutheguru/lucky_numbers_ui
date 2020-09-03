@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { Util } from '@/components/util';
+import { Util, Constants } from '@/components/util';
 import { Component } from 'vue-property-decorator';
 import { ValidationObserver } from 'vee-validate';
 
@@ -15,6 +15,12 @@ export default class BaseVue extends Vue {
 
 
     public extractError = Util.extractError;
+
+
+    public campaignStages = Constants.campaignStages;
+
+
+    public campaignTypes = Constants.campaignTypes;
 
 
 }
