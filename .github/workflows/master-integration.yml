@@ -87,7 +87,7 @@ jobs:
         type: now
         target_branch: 'master'
       env:
-        GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
+        GITHUB_TOKEN: ${{secrets.GIT_ACCESS_TOKEN}}
     - name: Set Kube Deployment Version
       run: |
         git branch
